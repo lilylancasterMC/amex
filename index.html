@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Amex brand health: August to early October 2026</title>
+<style>
+:root{
+  --ax-accent:#c4623e;
+  --color-fg:#1f1e1d;--color-fg-muted:#6b6a68;--color-panel:#ffffff;--color-border-line:#e6e3dd;
+  --color-ok:#2f7d4f;--color-bad:#b3402a;--color-warn:#c98a1b;
+  --cds-surface-popover:#f6f4f0;--cds-border:#dcd8d0;--cds-text-secondary:#6b6a68;
+  --cds-chart-muted:#a9a69f;--cds-chart-grid:#ece9e3;--cds-chart-reference:#8f8c85;
+  --cds-font-size-title:2rem;--cds-font-size-heading:1.0625rem;--cds-font-size-body:.9375rem;--cds-font-size-caption:.8125rem;
+  --cds-font-weight-medium:500;
+  --cds-gap-xs:.375rem;--cds-gap-sm:.625rem;--cds-gap-md:1rem;--cds-gap-lg:1.5rem;--cds-gap-xl:2.25rem;
+  --cds-pad-xs:.375rem;--cds-pad-sm:.625rem;--cds-pad-lg:1.25rem;
+  --cds-radius:.625rem;--cds-shadow-popover:0 4px 16px rgba(0,0,0,.12);--cds-dur-slow:.3s;
+  --font-anthropic-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --font-anthropic-serif:Georgia,"Times New Roman",serif;
+  --page-bg:#faf9f5;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --ax-accent:#e08a66;
+    --color-fg:#f2f0ea;--color-fg-muted:#a9a69f;--color-panel:#262624;--color-border-line:#3a3936;
+    --color-ok:#5fb383;--color-bad:#e0795f;--color-warn:#e0aa4a;
+    --cds-surface-popover:#30302d;--cds-border:#46443f;--cds-text-secondary:#a9a69f;
+    --cds-chart-muted:#77746d;--cds-chart-grid:#34332f;--cds-chart-reference:#8f8c85;
+    --cds-shadow-popover:0 4px 16px rgba(0,0,0,.5);
+    --page-bg:#1a1918;
+  }
+}
+:root{color-scheme:light dark}
+html,body{margin:0;background:var(--page-bg);color:var(--color-fg);font-family:var(--font-anthropic-sans)}
+body{padding:clamp(1rem,3vw,2.5rem);padding-top:calc(clamp(1rem,3vw,2.5rem) + env(safe-area-inset-top,0px));padding-bottom:calc(clamp(1rem,3vw,2.5rem) + env(safe-area-inset-bottom,0px));box-sizing:border-box}
+@keyframes axpulse{0%,100%{opacity:1}50%{opacity:.45}}
+.dash-skeleton{animation:axpulse 1.4s ease-in-out infinite}
+</style>
+<style>
+.ax{max-width:1100px;margin-inline:auto;font-family:var(--font-anthropic-sans);color:var(--color-fg);display:flex;flex-direction:column;gap:var(--cds-gap-xl)}
+.ax h1{font-family:var(--font-anthropic-serif);font-weight:400;font-size:var(--cds-font-size-title);margin:0 0 var(--cds-gap-xs)}
+.ax h2{font-size:var(--cds-font-size-heading);font-weight:var(--cds-font-weight-medium);margin:0 0 var(--cds-gap-sm)}
+.ax p{margin:0}
+.ax-take{font-size:var(--cds-font-size-body);max-width:46rem}
+.ax-meta{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin-top:var(--cds-gap-xs)!important}
+.ax-grid{display:grid;gap:var(--cds-gap-md);grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr))}
+.ax-grid-c{display:grid;gap:var(--cds-gap-md);grid-template-columns:repeat(auto-fit,minmax(min(100%,26rem),1fr))}
+.ax-card{background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);padding:var(--cds-pad-lg);min-width:0}
+.ax-card h3{font-size:var(--cds-font-size-heading);font-weight:var(--cds-font-weight-medium);margin:0 0 2px}
+.ax-note{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin-bottom:var(--cds-gap-sm)}
+.ax-label{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+.ax-big{font-family:var(--font-anthropic-serif);font-weight:400;font-size:2.4rem;line-height:1.1;font-variant-numeric:tabular-nums;display:block;margin:4px 0}
+.ax-sub{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin-top:2px}
+.ax-sub b{color:var(--color-fg);font-weight:var(--cds-font-weight-medium);font-variant-numeric:tabular-nums}
+.ax-box{position:relative;min-height:300px}
+.ax-box svg text{font-family:var(--font-anthropic-sans)}
+.ax-tip{position:absolute;display:none;background:var(--cds-surface-popover);border:1px solid var(--cds-border);border-radius:var(--cds-radius);box-shadow:var(--cds-shadow-popover);padding:var(--cds-pad-xs) var(--cds-pad-sm);font-size:var(--cds-font-size-caption);pointer-events:none;white-space:nowrap;z-index:2}
+.ax-tip-h{color:var(--cds-text-secondary);margin-bottom:2px}
+.ax-tip-r{display:grid;grid-template-columns:10px 1fr auto;gap:6px;align-items:center}
+.ax-tip-f{color:var(--cds-text-secondary);margin-top:3px}
+.ax-sw{width:8px;height:8px;border-radius:50%;display:inline-block}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+.ax-tw{overflow-x:auto}
+.ax table{width:100%;border-collapse:collapse;font-size:var(--cds-font-size-body)}
+.ax th{font-size:var(--cds-font-size-caption);font-weight:var(--cds-font-weight-medium);color:var(--color-fg-muted);text-align:left;padding:6px 10px;border-bottom:1px solid var(--color-border-line);white-space:nowrap}
+.ax th.num{text-align:right}
+.ax td{padding:7px 10px;border-bottom:1px solid var(--color-border-line);white-space:nowrap}
+.ax tr.ax-low td{background:var(--cds-surface-popover)}
+.ax-defs{display:grid;gap:var(--cds-gap-xs);font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+.ax-defs b{color:var(--color-fg);font-weight:var(--cds-font-weight-medium)}
+.ax-fail{display:flex;align-items:center;justify-content:center;gap:6px;min-height:inherit;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+.ax-dot{width:.375rem;height:.375rem;border-radius:50%;background:var(--color-bad);display:inline-block}
+[data-dash-source-state=empty]{color:transparent}
+[data-dash-source-state=refreshing]{opacity:.5;transition:opacity var(--cds-dur-slow)}
+
+.ax-tabbar{flex-direction:row;gap:var(--cds-gap-xs);border-bottom:1px solid var(--color-border-line);margin-bottom:var(--cds-gap-lg)}
+.ax-tab{font-family:var(--font-anthropic-sans);font-size:var(--cds-font-size-body);background:none;border:0;border-bottom:2px solid transparent;color:var(--color-fg-muted);padding:8px 14px;cursor:pointer;margin-bottom:-1px}
+.ax-tab.ax-on{color:var(--color-fg);border-bottom-color:var(--color-fg);font-weight:var(--cds-font-weight-medium)}
+.ax-page[hidden]{display:none}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+</head>
+<body>
+
+
+<div class="ax ax-tabbar" role="tablist" id="ax-tabs">
+  <button class="ax-tab ax-on" id="ax-tab-1" role="tab" aria-selected="true" type="button">Brand health vs. competitors</button>
+  <button class="ax-tab" id="ax-tab-2" role="tab" aria-selected="false" type="button">Politically engaged customers</button>
+</div>
+
+<div class="ax ax-page" id="brand">
+  <header>
+    <h1 id="ax-title">Amex brand health: August to early October 2026</h1>
+    <p class="ax-take">Through mid-September Amex's favorability stayed in its usual range, while buzz dipped in early September, before the October news. The most recent two weeks rest on a much smaller Amex sample than earlier weeks, so treat them as directional.</p>
+    <p class="ax-meta">U.S. general population · Morning Consult Daily Tracker · weekly, weeks ending Aug 9 to Oct 11</p>
+  </header>
+
+  <section id="ax-scorecard">
+    <h2>American Express: the baseline and the last two weeks</h2>
+    <div class="ax-grid">
+      <div class="ax-card">
+        <div class="ax-label">Net favorability</div>
+        <span class="ax-big dash-skeleton" data-m="Net favorability" data-source="amex_focus" data-field="base_avg" data-where="metric=Net favorability">—</span>
+        <div class="ax-sub">Average of weekly readings, weeks ending Aug 9 to Sep 20</div>
+        <div class="ax-sub">Range <b data-m="Net favorability" data-source="amex_focus" data-field="base_min" data-where="metric=Net favorability">—</b> to <b data-m="Net favorability" data-source="amex_focus" data-field="base_max" data-where="metric=Net favorability">—</b></div>
+        <div class="ax-sub">Week ending Oct 4: <b data-m="Net favorability" data-source="amex_focus" data-field="oct4" data-where="metric=Net favorability">—</b> · Oct 11: <b data-m="Net favorability" data-source="amex_focus" data-field="oct11" data-where="metric=Net favorability">—</b> (small samples)</div>
+      </div>
+      <div class="ax-card">
+        <div class="ax-label">Net buzz</div>
+        <span class="ax-big dash-skeleton" data-m="Net buzz" data-source="amex_focus" data-field="base_avg" data-where="metric=Net buzz">—</span>
+        <div class="ax-sub">Average of weekly readings, weeks ending Aug 9 to Sep 20</div>
+        <div class="ax-sub">Range <b data-m="Net buzz" data-source="amex_focus" data-field="base_min" data-where="metric=Net buzz">—</b> to <b data-m="Net buzz" data-source="amex_focus" data-field="base_max" data-where="metric=Net buzz">—</b></div>
+        <div class="ax-sub">Week ending Oct 4: <b data-m="Net buzz" data-source="amex_focus" data-field="oct4" data-where="metric=Net buzz">—</b> · Oct 11: <b data-m="Net buzz" data-source="amex_focus" data-field="oct11" data-where="metric=Net buzz">—</b> (small samples)</div>
+      </div>
+      <div class="ax-card">
+        <div class="ax-label">Net purchase consideration</div>
+        <span class="ax-big dash-skeleton" data-m="Net purchase consideration" data-source="amex_focus" data-field="base_avg" data-where="metric=Net purchase consideration">—</span>
+        <div class="ax-sub">Average of weekly readings, weeks ending Aug 9 to Sep 20</div>
+        <div class="ax-sub">Range <b data-m="Net purchase consideration" data-source="amex_focus" data-field="base_min" data-where="metric=Net purchase consideration">—</b> to <b data-m="Net purchase consideration" data-source="amex_focus" data-field="base_max" data-where="metric=Net purchase consideration">—</b></div>
+        <div class="ax-sub">Week ending Oct 4: <b data-m="Net purchase consideration" data-source="amex_focus" data-field="oct4" data-where="metric=Net purchase consideration">—</b> · Oct 11: <b data-m="Net purchase consideration" data-source="amex_focus" data-field="oct11" data-where="metric=Net purchase consideration">—</b> (small samples)</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ax-weekly">
+    <h2>Week by week against Chase, Capital One and Discover</h2>
+    <div class="ax-grid-c">
+      <div class="ax-card">
+        <h3>Net favorability</h3>
+        <p class="ax-note">Amex in color. Dashed line and open circles mark weeks with a much smaller Amex sample. The shaded band is the week that includes Oct 8.</p>
+        <div class="ax-box dash-skeleton" id="ax-wfav" data-source="weekly_metrics"></div>
+      </div>
+      <div class="ax-card">
+        <h3>Net buzz</h3>
+        <p class="ax-note">Heard positive things minus heard negative things.</p>
+        <div class="ax-box dash-skeleton" id="ax-wbuzz" data-source="weekly_metrics"></div>
+      </div>
+      <div class="ax-card">
+        <h3>Net purchase consideration</h3>
+        <p class="ax-note">Very likely to consider minus not very likely or less.</p>
+        <div class="ax-box dash-skeleton" id="ax-wcon" data-source="weekly_metrics"></div>
+      </div>
+      <div class="ax-card">
+        <h3>Respondents per week</h3>
+        <p class="ax-note">Amex's weekly sample dropped from late September. Chase's did not. Smaller samples make weekly readings swing more.</p>
+        <div class="ax-box dash-skeleton" id="ax-wn" style="min-height:240px" data-source="weekly_metrics"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ax-table-section">
+    <h2>Amex, week by week</h2>
+    <div class="ax-card">
+      <p class="ax-note">Shaded weeks have a much smaller Amex sample. The Oct 11 week includes days before and after the Oct 8 announcement, and they can't be separated.</p>
+      <div class="ax-tw">
+        <table id="ax-wtable" data-source="amex_weekly" data-row-key="week">
+          <thead><tr>
+            <th data-field="week">Week ending</th>
+            <th class="num" data-field="favorability">Net favorability</th>
+            <th class="num" data-field="buzz">Net buzz</th>
+            <th class="num" data-field="consideration">Net consideration</th>
+            <th class="num" data-field="n">Amex respondents</th>
+            <th class="num" data-field="chase_n">Chase respondents</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="ax-context">
+    <h2>Longer view: the last 12 months</h2>
+    <div class="ax-grid-c">
+      <div class="ax-card">
+        <h3>Net favorability</h3>
+        <p class="ax-note">Monthly, full months only, against all five major issuers.</p>
+        <div class="ax-box dash-skeleton" id="ax-mfav" style="min-height:260px" data-source="brand_metrics"></div>
+      </div>
+      <div class="ax-card">
+        <h3>Net buzz</h3>
+        <p class="ax-note">Monthly, full months only.</p>
+        <div class="ax-box dash-skeleton" id="ax-mbuzz" style="min-height:260px" data-source="brand_metrics"></div>
+      </div>
+      <div class="ax-card">
+        <h3>Net purchase consideration</h3>
+        <p class="ax-note">Monthly, full months only.</p>
+        <div class="ax-box dash-skeleton" id="ax-mcon" style="min-height:260px" data-source="brand_metrics"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ax-method">
+    <h2>About the data</h2>
+    <div class="ax-card">
+      <div class="ax-defs">
+        <p><b>Net favorability:</b> percent with a favorable opinion minus percent with an unfavorable opinion.</p>
+        <p><b>Net buzz:</b> percent who heard positive things about the brand minus percent who heard negative things.</p>
+        <p><b>Net purchase consideration:</b> percent very likely (or more) to consider purchasing from the brand minus percent not very likely (or less).</p>
+        <p><b>Source:</b> Morning Consult Daily Tracker, U.S. general population, pulled Oct 13, 2026. Capital One reflects the tracker's corporate "Capital One Financial" series, the closest match among several Capital One products.</p>
+        <p><b>Weekly view:</b> weeks run Monday to Sunday and are labeled by the Sunday. The partial week at the start of August and the two days after Oct 11 are left out. Citi, Visa and Mastercard are left out of the weekly charts because of small weekly samples or because they are networks.</p>
+        <p><b>Caution:</b> the reason for the lower Amex sample in recent weeks has not been established. Weekly readings can move several points on sampling alone, and more so for smaller samples.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="ax ax-page" id="engaged" hidden></div>
+
+<template id="ax-tpl-eng">
+  <header>
+    <h1 id="ax-eng-title">Politically engaged Amex customers: August to October 2026</h1>
+    <p class="ax-take">From August to September, trust, favorability, buzz and consideration among politically engaged Amex users all slipped, trust the most. Weekly readings are too thin to say whether that continued into October, when only a few dozen engaged respondents are available.</p>
+    <p class="ax-meta">Amex users (any use, from several times a day to monthly or less) who are extremely or very interested in politics and public affairs · Morning Consult Daily Tracker, U.S. · data through Oct 7</p>
+  </header>
+
+  <section id="ax-eng-scorecard">
+    <h2>Politically engaged Amex users, September vs. August</h2>
+    <div class="ax-grid">
+      <div class="ax-card">
+        <div class="ax-label">Net trust</div>
+        <span class="ax-big dash-skeleton" data-m="Net trust" data-source="eng_summary" data-field="sep26" data-where="metric=Net trust">—</span>
+        <div class="ax-sub"><b data-m="Net trust" data-source="eng_summary" data-field="change" data-where="metric=Net trust">—</b> vs. August</div>
+        <div class="ax-sub"><b data-m="Net trust" data-source="eng_summary" data-field="gap" data-where="metric=Net trust">—</b> vs. Amex users not interested in politics</div>
+      </div>
+      <div class="ax-card">
+        <div class="ax-label">Net favorability</div>
+        <span class="ax-big dash-skeleton" data-m="Net favorability" data-source="eng_summary" data-field="sep26" data-where="metric=Net favorability">—</span>
+        <div class="ax-sub"><b data-m="Net favorability" data-source="eng_summary" data-field="change" data-where="metric=Net favorability">—</b> vs. August</div>
+        <div class="ax-sub"><b data-m="Net favorability" data-source="eng_summary" data-field="gap" data-where="metric=Net favorability">—</b> vs. Amex users not interested in politics</div>
+      </div>
+      <div class="ax-card">
+        <div class="ax-label">Net buzz</div>
+        <span class="ax-big dash-skeleton" data-m="Net buzz" data-source="eng_summary" data-field="sep26" data-where="metric=Net buzz">—</span>
+        <div class="ax-sub"><b data-m="Net buzz" data-source="eng_summary" data-field="change" data-where="metric=Net buzz">—</b> vs. August</div>
+        <div class="ax-sub"><b data-m="Net buzz" data-source="eng_summary" data-field="gap" data-where="metric=Net buzz">—</b> vs. Amex users not interested in politics</div>
+      </div>
+      <div class="ax-card">
+        <div class="ax-label">Net purchase consideration</div>
+        <span class="ax-big dash-skeleton" data-m="Net purchase consideration" data-source="eng_summary" data-field="sep26" data-where="metric=Net purchase consideration">—</span>
+        <div class="ax-sub"><b data-m="Net purchase consideration" data-source="eng_summary" data-field="change" data-where="metric=Net purchase consideration">—</b> vs. August</div>
+        <div class="ax-sub"><b data-m="Net purchase consideration" data-source="eng_summary" data-field="gap" data-where="metric=Net purchase consideration">—</b> vs. Amex users not interested in politics</div>
+      </div>
+    </div>
+    <p class="ax-note" style="margin-top:var(--cds-gap-sm)">Monthly figures, the most reliable cut for this group. Scores run far higher than in the general population because these are existing Amex users.</p>
+  </section>
+
+  <section id="ax-eng-weekly">
+    <h2>Week by week, politically engaged users only</h2>
+    <div class="ax-grid-c">
+      <div class="ax-card">
+        <h3>Net trust</h3>
+        <p class="ax-note">Dashed line and open circles mark weeks with very few respondents. The last point is a partial week, Oct 5 to 7.</p>
+        <div class="ax-box dash-skeleton" id="ax-wetrust" style="min-height:260px" data-source="engaged_weekly"></div>
+      </div>
+      <div class="ax-card">
+        <h3>Net favorability</h3>
+        <p class="ax-note">Share favorable minus share unfavorable.</p>
+        <div class="ax-box dash-skeleton" id="ax-wefav" style="min-height:260px" data-source="engaged_weekly"></div>
+      </div>
+      <div class="ax-card">
+        <h3>Net buzz</h3>
+        <p class="ax-note">Heard positive things minus heard negative things.</p>
+        <div class="ax-box dash-skeleton" id="ax-webuzz" style="min-height:260px" data-source="engaged_weekly"></div>
+      </div>
+      <div class="ax-card">
+        <h3>Net purchase consideration</h3>
+        <p class="ax-note">Very likely to consider minus not very likely or less.</p>
+        <div class="ax-box dash-skeleton" id="ax-wecon" style="min-height:260px" data-source="engaged_weekly"></div>
+      </div>
+    </div>
+    <p class="ax-note" style="margin-top:var(--cds-gap-sm)">Even in the better-sampled weeks there are only about a hundred engaged respondents, so single weeks swing widely. Read the direction over several weeks, not any one point. Users not interested in politics are not charted weekly because they number only a few dozen a week at most.</p>
+  </section>
+
+  <section id="ax-eng-wtable-section">
+    <h2>Week by week: the numbers</h2>
+    <div class="ax-card">
+      <p class="ax-note">Shaded weeks have very few engaged respondents.</p>
+      <div class="ax-tw">
+        <table id="ax-eng-wtable" data-source="eng_weekly" data-row-key="week">
+          <thead><tr>
+            <th data-field="week">Week ending</th>
+            <th class="num" data-field="trust">Net trust</th>
+            <th class="num" data-field="favorability">Net favorability</th>
+            <th class="num" data-field="buzz">Net buzz</th>
+            <th class="num" data-field="consideration">Net consideration</th>
+            <th class="num" data-field="n">Engaged respondents</th>
+            <th class="num" data-field="other_n">Not-interested respondents</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="ax-eng-trends">
+    <h2>Longer view: engaged vs. not interested, last 12 months</h2>
+    <div class="ax-grid-c">
+      <div class="ax-card">
+        <h3>Net trust</h3>
+        <p class="ax-note">Monthly. Trust to do what is right: trust minus distrust. Politically engaged Amex users in color.</p>
+        <div class="ax-box dash-skeleton" id="ax-etrust" style="min-height:260px" data-source="engaged_users"></div>
+      </div>
+      <div class="ax-card">
+        <h3>Net favorability</h3>
+        <p class="ax-note">Monthly.</p>
+        <div class="ax-box dash-skeleton" id="ax-efav" style="min-height:260px" data-source="engaged_users"></div>
+      </div>
+      <div class="ax-card">
+        <h3>Net buzz</h3>
+        <p class="ax-note">Monthly.</p>
+        <div class="ax-box dash-skeleton" id="ax-ebuzz" style="min-height:260px" data-source="engaged_users"></div>
+      </div>
+      <div class="ax-card">
+        <h3>Net purchase consideration</h3>
+        <p class="ax-note">Monthly.</p>
+        <div class="ax-box dash-skeleton" id="ax-econ" style="min-height:260px" data-source="engaged_users"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ax-eng-n-section">
+    <h2>Respondents each month</h2>
+    <div class="ax-card">
+      <p class="ax-note">Both groups got smaller from August. The not-interested group is the smaller one, so its lines move the most.</p>
+      <div class="ax-tw">
+        <table id="ax-eng-n" data-source="eng_n" data-row-key="month">
+          <thead><tr>
+            <th data-field="month">Month</th>
+            <th class="num" data-field="engaged_n">Politically engaged</th>
+            <th class="num" data-field="other_n">Not interested</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="ax-eng-method">
+    <h2>About this view</h2>
+    <div class="ax-card">
+      <div class="ax-defs">
+        <p><b>Who is in it:</b> respondents who say they use or have an account with Amex, at any frequency, split by their answer to "How interested are you in politics and public affairs?" Engaged means extremely or very interested. Not interested means not too interested or not at all.</p>
+        <p><b>What it measures:</b> interest in politics, used here as a stand-in for being politically or policy-aware. It does not measure knowledge of or views on any particular policy. Respondents who are somewhat interested are in neither group.</p>
+        <p><b>Purchase consideration (monthly longer view):</b> the tracker returned this monthly metric in four finer groups. The two engaged and the two not-interested groups were combined by weighting each by its respondents, so that series is derived. The weekly consideration figures and all other metrics come straight from the tracker.</p>
+        <p><b>Weekly view:</b> weeks run Monday to Sunday and are labeled by the Sunday. The two-day week at the start of August is left out. For this audience the data runs through Oct 7, so the last point covers only Oct 5 to 7.</p>
+        <p><b>Caution:</b> engaged-user samples are well under half what they were last fall, and the not-interested group is small, so single readings can swing by many points.</p>
+      </div>
+    </div>
+  </section>
+</template>
+
+
+<script>
+(function(){
+  var DATA={"brand_metrics":[{"month":"2025-10-31","brand":"American Express","type":"Issuer","metric":"Net favorability","value":39.67,"n":5417,"partial":"no"},{"month":"2025-11-30","brand":"American Express","type":"Issuer","metric":"Net favorability","value":41.26,"n":5167,"partial":"no"},{"month":"2025-12-31","brand":"American Express","type":"Issuer","metric":"Net favorability","value":43.03,"n":5163,"partial":"no"},{"month":"2026-01-31","brand":"American Express","type":"Issuer","metric":"Net favorability","value":38.8,"n":5358,"partial":"no"},{"month":"2026-02-28","brand":"American Express","type":"Issuer","metric":"Net favorability","value":37.86,"n":4839,"partial":"no"},{"month":"2026-03-31","brand":"American Express","type":"Issuer","metric":"Net favorability","value":39.63,"n":5398,"partial":"no"},{"month":"2026-04-30","brand":"American Express","type":"Issuer","metric":"Net favorability","value":39.54,"n":5170,"partial":"no"},{"month":"2026-05-31","brand":"American Express","type":"Issuer","metric":"Net favorability","value":40.84,"n":5101,"partial":"no"},{"month":"2026-06-30","brand":"American Express","type":"Issuer","metric":"Net favorability","value":41.92,"n":4982,"partial":"no"},{"month":"2026-07-31","brand":"American Express","type":"Issuer","metric":"Net favorability","value":39.18,"n":5143,"partial":"no"},{"month":"2026-08-31","brand":"American Express","type":"Issuer","metric":"Net favorability","value":38.33,"n":2899,"partial":"no"},{"month":"2026-09-30","brand":"American Express","type":"Issuer","metric":"Net favorability","value":39.92,"n":2153,"partial":"no"},{"month":"2026-10-13","brand":"American Express","type":"Issuer","metric":"Net favorability","value":28.57,"n":150,"partial":"yes"},{"month":"2025-10-31","brand":"Capital One","type":"Issuer","metric":"Net favorability","value":32.15,"n":5369,"partial":"no"},{"month":"2025-11-30","brand":"Capital One","type":"Issuer","metric":"Net favorability","value":33.06,"n":5150,"partial":"no"},{"month":"2025-12-31","brand":"Capital One","type":"Issuer","metric":"Net favorability","value":31.9,"n":5126,"partial":"no"},{"month":"2026-01-31","brand":"Capital One","type":"Issuer","metric":"Net favorability","value":33.81,"n":5326,"partial":"no"},{"month":"2026-02-28","brand":"Capital One","type":"Issuer","metric":"Net favorability","value":33.03,"n":4732,"partial":"no"},{"month":"2026-03-31","brand":"Capital One","type":"Issuer","metric":"Net favorability","value":34.11,"n":5310,"partial":"no"},{"month":"2026-04-30","brand":"Capital One","type":"Issuer","metric":"Net favorability","value":33.81,"n":4961,"partial":"no"},{"month":"2026-05-31","brand":"Capital One","type":"Issuer","metric":"Net favorability","value":33.81,"n":5133,"partial":"no"},{"month":"2026-06-30","brand":"Capital One","type":"Issuer","metric":"Net favorability","value":34.52,"n":5166,"partial":"no"},{"month":"2026-07-31","brand":"Capital One","type":"Issuer","metric":"Net favorability","value":33.46,"n":5303,"partial":"no"},{"month":"2026-08-31","brand":"Capital One","type":"Issuer","metric":"Net favorability","value":34.28,"n":5201,"partial":"no"},{"month":"2026-09-30","brand":"Capital One","type":"Issuer","metric":"Net favorability","value":33.37,"n":4842,"partial":"no"},{"month":"2026-10-13","brand":"Capital One","type":"Issuer","metric":"Net favorability","value":34.07,"n":2147,"partial":"yes"},{"month":"2025-10-31","brand":"Chase","type":"Issuer","metric":"Net favorability","value":39.42,"n":5494,"partial":"no"},{"month":"2025-11-30","brand":"Chase","type":"Issuer","metric":"Net favorability","value":39.53,"n":5515,"partial":"no"},{"month":"2025-12-31","brand":"Chase","type":"Issuer","metric":"Net favorability","value":40.35,"n":5079,"partial":"no"},{"month":"2026-01-31","brand":"Chase","type":"Issuer","metric":"Net favorability","value":37.39,"n":5323,"partial":"no"},{"month":"2026-02-28","brand":"Chase","type":"Issuer","metric":"Net favorability","value":42.56,"n":4734,"partial":"no"},{"month":"2026-03-31","brand":"Chase","type":"Issuer","metric":"Net favorability","value":41.84,"n":5417,"partial":"no"},{"month":"2026-04-30","brand":"Chase","type":"Issuer","metric":"Net favorability","value":39.94,"n":5092,"partial":"no"},{"month":"2026-05-31","brand":"Chase","type":"Issuer","metric":"Net favorability","value":40.97,"n":5203,"partial":"no"},{"month":"2026-06-30","brand":"Chase","type":"Issuer","metric":"Net favorability","value":41.88,"n":4955,"partial":"no"},{"month":"2026-07-31","brand":"Chase","type":"Issuer","metric":"Net favorability","value":40.65,"n":5254,"partial":"no"},{"month":"2026-08-31","brand":"Chase","type":"Issuer","metric":"Net favorability","value":41.71,"n":5334,"partial":"no"},{"month":"2026-09-30","brand":"Chase","type":"Issuer","metric":"Net favorability","value":38.3,"n":5024,"partial":"no"},{"month":"2026-10-13","brand":"Chase","type":"Issuer","metric":"Net favorability","value":42.96,"n":2147,"partial":"yes"},{"month":"2025-10-31","brand":"Citi","type":"Issuer","metric":"Net favorability","value":31.35,"n":549,"partial":"no"},{"month":"2025-11-30","brand":"Citi","type":"Issuer","metric":"Net favorability","value":28.87,"n":489,"partial":"no"},{"month":"2025-12-31","brand":"Citi","type":"Issuer","metric":"Net favorability","value":30.44,"n":682,"partial":"no"},{"month":"2026-01-31","brand":"Citi","type":"Issuer","metric":"Net favorability","value":25.46,"n":584,"partial":"no"},{"month":"2026-02-28","brand":"Citi","type":"Issuer","metric":"Net favorability","value":29.71,"n":593,"partial":"no"},{"month":"2026-03-31","brand":"Citi","type":"Issuer","metric":"Net favorability","value":31.12,"n":723,"partial":"no"},{"month":"2026-04-30","brand":"Citi","type":"Issuer","metric":"Net favorability","value":32.14,"n":596,"partial":"no"},{"month":"2026-05-31","brand":"Citi","type":"Issuer","metric":"Net favorability","value":27.77,"n":529,"partial":"no"},{"month":"2026-06-30","brand":"Citi","type":"Issuer","metric":"Net favorability","value":31.54,"n":636,"partial":"no"},{"month":"2026-07-31","brand":"Citi","type":"Issuer","metric":"Net favorability","value":24.93,"n":579,"partial":"no"},{"month":"2026-08-31","brand":"Citi","type":"Issuer","metric":"Net favorability","value":31.43,"n":600,"partial":"no"},{"month":"2026-09-30","brand":"Citi","type":"Issuer","metric":"Net favorability","value":26.51,"n":783,"partial":"no"},{"month":"2026-10-13","brand":"Citi","type":"Issuer","metric":"Net favorability","value":30.29,"n":277,"partial":"yes"},{"month":"2025-10-31","brand":"Discover","type":"Issuer","metric":"Net favorability","value":41.06,"n":2609,"partial":"no"},{"month":"2025-11-30","brand":"Discover","type":"Issuer","metric":"Net favorability","value":42.92,"n":2590,"partial":"no"},{"month":"2025-12-31","brand":"Discover","type":"Issuer","metric":"Net favorability","value":40.92,"n":2565,"partial":"no"},{"month":"2026-01-31","brand":"Discover","type":"Issuer","metric":"Net favorability","value":39.1,"n":2724,"partial":"no"},{"month":"2026-02-28","brand":"Discover","type":"Issuer","metric":"Net favorability","value":41.1,"n":2379,"partial":"no"},{"month":"2026-03-31","brand":"Discover","type":"Issuer","metric":"Net favorability","value":40.3,"n":2718,"partial":"no"},{"month":"2026-04-30","brand":"Discover","type":"Issuer","metric":"Net favorability","value":41.52,"n":2602,"partial":"no"},{"month":"2026-05-31","brand":"Discover","type":"Issuer","metric":"Net favorability","value":40.98,"n":2565,"partial":"no"},{"month":"2026-06-30","brand":"Discover","type":"Issuer","metric":"Net favorability","value":36.4,"n":2598,"partial":"no"},{"month":"2026-07-31","brand":"Discover","type":"Issuer","metric":"Net favorability","value":40.38,"n":2711,"partial":"no"},{"month":"2026-08-31","brand":"Discover","type":"Issuer","metric":"Net favorability","value":41.84,"n":2500,"partial":"no"},{"month":"2026-09-30","brand":"Discover","type":"Issuer","metric":"Net favorability","value":41.1,"n":2462,"partial":"no"},{"month":"2026-10-13","brand":"Discover","type":"Issuer","metric":"Net favorability","value":37.57,"n":1070,"partial":"yes"},{"month":"2025-10-31","brand":"Mastercard","type":"Network","metric":"Net favorability","value":56.94,"n":796,"partial":"no"},{"month":"2025-11-30","brand":"Mastercard","type":"Network","metric":"Net favorability","value":64.68,"n":617,"partial":"no"},{"month":"2025-12-31","brand":"Mastercard","type":"Network","metric":"Net favorability","value":59.44,"n":528,"partial":"no"},{"month":"2026-01-31","brand":"Mastercard","type":"Network","metric":"Net favorability","value":59.75,"n":842,"partial":"no"},{"month":"2026-02-28","brand":"Mastercard","type":"Network","metric":"Net favorability","value":56.1,"n":602,"partial":"no"},{"month":"2026-03-31","brand":"Mastercard","type":"Network","metric":"Net favorability","value":59.66,"n":587,"partial":"no"},{"month":"2026-04-30","brand":"Mastercard","type":"Network","metric":"Net favorability","value":56.96,"n":696,"partial":"no"},{"month":"2026-05-31","brand":"Mastercard","type":"Network","metric":"Net favorability","value":58.87,"n":600,"partial":"no"},{"month":"2026-06-30","brand":"Mastercard","type":"Network","metric":"Net favorability","value":60.17,"n":564,"partial":"no"},{"month":"2026-07-31","brand":"Mastercard","type":"Network","metric":"Net favorability","value":60.38,"n":731,"partial":"no"},{"month":"2026-08-31","brand":"Mastercard","type":"Network","metric":"Net favorability","value":53.93,"n":640,"partial":"no"},{"month":"2026-09-30","brand":"Mastercard","type":"Network","metric":"Net favorability","value":64.57,"n":620,"partial":"no"},{"month":"2026-10-13","brand":"Mastercard","type":"Network","metric":"Net favorability","value":64.08,"n":267,"partial":"yes"},{"month":"2025-10-31","brand":"Visa","type":"Network","metric":"Net favorability","value":69.96,"n":828,"partial":"no"},{"month":"2025-11-30","brand":"Visa","type":"Network","metric":"Net favorability","value":67.37,"n":636,"partial":"no"},{"month":"2025-12-31","brand":"Visa","type":"Network","metric":"Net favorability","value":72.36,"n":541,"partial":"no"},{"month":"2026-01-31","brand":"Visa","type":"Network","metric":"Net favorability","value":68.82,"n":4407,"partial":"no"},{"month":"2026-02-28","brand":"Visa","type":"Network","metric":"Net favorability","value":67.61,"n":4868,"partial":"no"},{"month":"2026-03-31","brand":"Visa","type":"Network","metric":"Net favorability","value":69.92,"n":5355,"partial":"no"},{"month":"2026-04-30","brand":"Visa","type":"Network","metric":"Net favorability","value":67.61,"n":4898,"partial":"no"},{"month":"2026-05-31","brand":"Visa","type":"Network","metric":"Net favorability","value":70.22,"n":5192,"partial":"no"},{"month":"2026-06-30","brand":"Visa","type":"Network","metric":"Net favorability","value":67.74,"n":4946,"partial":"no"},{"month":"2026-07-31","brand":"Visa","type":"Network","metric":"Net favorability","value":68.82,"n":5181,"partial":"no"},{"month":"2026-08-31","brand":"Visa","type":"Network","metric":"Net favorability","value":66.24,"n":5281,"partial":"no"},{"month":"2026-09-30","brand":"Visa","type":"Network","metric":"Net favorability","value":66.09,"n":4990,"partial":"no"},{"month":"2026-10-13","brand":"Visa","type":"Network","metric":"Net favorability","value":69.22,"n":2205,"partial":"yes"},{"month":"2025-10-31","brand":"American Express","type":"Issuer","metric":"Net buzz","value":24.93,"n":5417,"partial":"no"},{"month":"2025-11-30","brand":"American Express","type":"Issuer","metric":"Net buzz","value":25.57,"n":5167,"partial":"no"},{"month":"2025-12-31","brand":"American Express","type":"Issuer","metric":"Net buzz","value":26.64,"n":5163,"partial":"no"},{"month":"2026-01-31","brand":"American Express","type":"Issuer","metric":"Net buzz","value":23.74,"n":5358,"partial":"no"},{"month":"2026-02-28","brand":"American Express","type":"Issuer","metric":"Net buzz","value":23.83,"n":4839,"partial":"no"},{"month":"2026-03-31","brand":"American Express","type":"Issuer","metric":"Net buzz","value":22.98,"n":5398,"partial":"no"},{"month":"2026-04-30","brand":"American Express","type":"Issuer","metric":"Net buzz","value":23.44,"n":5170,"partial":"no"},{"month":"2026-05-31","brand":"American Express","type":"Issuer","metric":"Net buzz","value":21.72,"n":5101,"partial":"no"},{"month":"2026-06-30","brand":"American Express","type":"Issuer","metric":"Net buzz","value":25.96,"n":4982,"partial":"no"},{"month":"2026-07-31","brand":"American Express","type":"Issuer","metric":"Net buzz","value":22.33,"n":5143,"partial":"no"},{"month":"2026-08-31","brand":"American Express","type":"Issuer","metric":"Net buzz","value":23.26,"n":2899,"partial":"no"},{"month":"2026-09-30","brand":"American Express","type":"Issuer","metric":"Net buzz","value":21.59,"n":2153,"partial":"no"},{"month":"2026-10-13","brand":"American Express","type":"Issuer","metric":"Net buzz","value":19.32,"n":150,"partial":"yes"},{"month":"2025-10-31","brand":"Capital One","type":"Issuer","metric":"Net buzz","value":19.64,"n":5369,"partial":"no"},{"month":"2025-11-30","brand":"Capital One","type":"Issuer","metric":"Net buzz","value":20.45,"n":5150,"partial":"no"},{"month":"2025-12-31","brand":"Capital One","type":"Issuer","metric":"Net buzz","value":21.66,"n":5126,"partial":"no"},{"month":"2026-01-31","brand":"Capital One","type":"Issuer","metric":"Net buzz","value":21.76,"n":5326,"partial":"no"},{"month":"2026-02-28","brand":"Capital One","type":"Issuer","metric":"Net buzz","value":20.3,"n":4732,"partial":"no"},{"month":"2026-03-31","brand":"Capital One","type":"Issuer","metric":"Net buzz","value":19.13,"n":5310,"partial":"no"},{"month":"2026-04-30","brand":"Capital One","type":"Issuer","metric":"Net buzz","value":20.45,"n":4961,"partial":"no"},{"month":"2026-05-31","brand":"Capital One","type":"Issuer","metric":"Net buzz","value":21.63,"n":5133,"partial":"no"},{"month":"2026-06-30","brand":"Capital One","type":"Issuer","metric":"Net buzz","value":21.89,"n":5166,"partial":"no"},{"month":"2026-07-31","brand":"Capital One","type":"Issuer","metric":"Net buzz","value":20.61,"n":5303,"partial":"no"},{"month":"2026-08-31","brand":"Capital One","type":"Issuer","metric":"Net buzz","value":21.25,"n":5201,"partial":"no"},{"month":"2026-09-30","brand":"Capital One","type":"Issuer","metric":"Net buzz","value":20.87,"n":4842,"partial":"no"},{"month":"2026-10-13","brand":"Capital One","type":"Issuer","metric":"Net buzz","value":19.2,"n":2147,"partial":"yes"},{"month":"2025-10-31","brand":"Chase","type":"Issuer","metric":"Net buzz","value":22.95,"n":5494,"partial":"no"},{"month":"2025-11-30","brand":"Chase","type":"Issuer","metric":"Net buzz","value":23.87,"n":5515,"partial":"no"},{"month":"2025-12-31","brand":"Chase","type":"Issuer","metric":"Net buzz","value":24.67,"n":5079,"partial":"no"},{"month":"2026-01-31","brand":"Chase","type":"Issuer","metric":"Net buzz","value":23,"n":5323,"partial":"no"},{"month":"2026-02-28","brand":"Chase","type":"Issuer","metric":"Net buzz","value":25.33,"n":4734,"partial":"no"},{"month":"2026-03-31","brand":"Chase","type":"Issuer","metric":"Net buzz","value":24.2,"n":5417,"partial":"no"},{"month":"2026-04-30","brand":"Chase","type":"Issuer","metric":"Net buzz","value":22.96,"n":5092,"partial":"no"},{"month":"2026-05-31","brand":"Chase","type":"Issuer","metric":"Net buzz","value":25.01,"n":5203,"partial":"no"},{"month":"2026-06-30","brand":"Chase","type":"Issuer","metric":"Net buzz","value":26.11,"n":4955,"partial":"no"},{"month":"2026-07-31","brand":"Chase","type":"Issuer","metric":"Net buzz","value":25.19,"n":5254,"partial":"no"},{"month":"2026-08-31","brand":"Chase","type":"Issuer","metric":"Net buzz","value":23.91,"n":5334,"partial":"no"},{"month":"2026-09-30","brand":"Chase","type":"Issuer","metric":"Net buzz","value":25.02,"n":5024,"partial":"no"},{"month":"2026-10-13","brand":"Chase","type":"Issuer","metric":"Net buzz","value":26.55,"n":2147,"partial":"yes"},{"month":"2025-10-31","brand":"Citi","type":"Issuer","metric":"Net buzz","value":14.92,"n":549,"partial":"no"},{"month":"2025-11-30","brand":"Citi","type":"Issuer","metric":"Net buzz","value":16.83,"n":489,"partial":"no"},{"month":"2025-12-31","brand":"Citi","type":"Issuer","metric":"Net buzz","value":18,"n":682,"partial":"no"},{"month":"2026-01-31","brand":"Citi","type":"Issuer","metric":"Net buzz","value":16.12,"n":584,"partial":"no"},{"month":"2026-02-28","brand":"Citi","type":"Issuer","metric":"Net buzz","value":13.44,"n":593,"partial":"no"},{"month":"2026-03-31","brand":"Citi","type":"Issuer","metric":"Net buzz","value":14.76,"n":723,"partial":"no"},{"month":"2026-04-30","brand":"Citi","type":"Issuer","metric":"Net buzz","value":16,"n":596,"partial":"no"},{"month":"2026-05-31","brand":"Citi","type":"Issuer","metric":"Net buzz","value":12.96,"n":529,"partial":"no"},{"month":"2026-06-30","brand":"Citi","type":"Issuer","metric":"Net buzz","value":17.79,"n":636,"partial":"no"},{"month":"2026-07-31","brand":"Citi","type":"Issuer","metric":"Net buzz","value":13.96,"n":579,"partial":"no"},{"month":"2026-08-31","brand":"Citi","type":"Issuer","metric":"Net buzz","value":14.93,"n":600,"partial":"no"},{"month":"2026-09-30","brand":"Citi","type":"Issuer","metric":"Net buzz","value":15.17,"n":783,"partial":"no"},{"month":"2026-10-13","brand":"Citi","type":"Issuer","metric":"Net buzz","value":15.86,"n":277,"partial":"yes"},{"month":"2025-10-31","brand":"Discover","type":"Issuer","metric":"Net buzz","value":22.71,"n":2609,"partial":"no"},{"month":"2025-11-30","brand":"Discover","type":"Issuer","metric":"Net buzz","value":22.88,"n":2590,"partial":"no"},{"month":"2025-12-31","brand":"Discover","type":"Issuer","metric":"Net buzz","value":24.52,"n":2565,"partial":"no"},{"month":"2026-01-31","brand":"Discover","type":"Issuer","metric":"Net buzz","value":21.54,"n":2724,"partial":"no"},{"month":"2026-02-28","brand":"Discover","type":"Issuer","metric":"Net buzz","value":21.84,"n":2379,"partial":"no"},{"month":"2026-03-31","brand":"Discover","type":"Issuer","metric":"Net buzz","value":21.44,"n":2718,"partial":"no"},{"month":"2026-04-30","brand":"Discover","type":"Issuer","metric":"Net buzz","value":23.84,"n":2602,"partial":"no"},{"month":"2026-05-31","brand":"Discover","type":"Issuer","metric":"Net buzz","value":21.95,"n":2565,"partial":"no"},{"month":"2026-06-30","brand":"Discover","type":"Issuer","metric":"Net buzz","value":20.22,"n":2598,"partial":"no"},{"month":"2026-07-31","brand":"Discover","type":"Issuer","metric":"Net buzz","value":20.35,"n":2711,"partial":"no"},{"month":"2026-08-31","brand":"Discover","type":"Issuer","metric":"Net buzz","value":22.3,"n":2500,"partial":"no"},{"month":"2026-09-30","brand":"Discover","type":"Issuer","metric":"Net buzz","value":22.35,"n":2462,"partial":"no"},{"month":"2026-10-13","brand":"Discover","type":"Issuer","metric":"Net buzz","value":19.89,"n":1070,"partial":"yes"},{"month":"2025-10-31","brand":"Mastercard","type":"Network","metric":"Net buzz","value":31.36,"n":796,"partial":"no"},{"month":"2025-11-30","brand":"Mastercard","type":"Network","metric":"Net buzz","value":28.86,"n":617,"partial":"no"},{"month":"2025-12-31","brand":"Mastercard","type":"Network","metric":"Net buzz","value":25.95,"n":528,"partial":"no"},{"month":"2026-01-31","brand":"Mastercard","type":"Network","metric":"Net buzz","value":29.49,"n":842,"partial":"no"},{"month":"2026-02-28","brand":"Mastercard","type":"Network","metric":"Net buzz","value":27.87,"n":602,"partial":"no"},{"month":"2026-03-31","brand":"Mastercard","type":"Network","metric":"Net buzz","value":27.01,"n":587,"partial":"no"},{"month":"2026-04-30","brand":"Mastercard","type":"Network","metric":"Net buzz","value":30.15,"n":696,"partial":"no"},{"month":"2026-05-31","brand":"Mastercard","type":"Network","metric":"Net buzz","value":23.45,"n":600,"partial":"no"},{"month":"2026-06-30","brand":"Mastercard","type":"Network","metric":"Net buzz","value":26.26,"n":564,"partial":"no"},{"month":"2026-07-31","brand":"Mastercard","type":"Network","metric":"Net buzz","value":28.75,"n":731,"partial":"no"},{"month":"2026-08-31","brand":"Mastercard","type":"Network","metric":"Net buzz","value":28.69,"n":640,"partial":"no"},{"month":"2026-09-30","brand":"Mastercard","type":"Network","metric":"Net buzz","value":26.64,"n":620,"partial":"no"},{"month":"2026-10-13","brand":"Mastercard","type":"Network","metric":"Net buzz","value":27.66,"n":267,"partial":"yes"},{"month":"2025-10-31","brand":"Visa","type":"Network","metric":"Net buzz","value":34.34,"n":828,"partial":"no"},{"month":"2025-11-30","brand":"Visa","type":"Network","metric":"Net buzz","value":35.57,"n":636,"partial":"no"},{"month":"2025-12-31","brand":"Visa","type":"Network","metric":"Net buzz","value":36.97,"n":541,"partial":"no"},{"month":"2026-01-31","brand":"Visa","type":"Network","metric":"Net buzz","value":32.32,"n":4407,"partial":"no"},{"month":"2026-02-28","brand":"Visa","type":"Network","metric":"Net buzz","value":31.13,"n":4868,"partial":"no"},{"month":"2026-03-31","brand":"Visa","type":"Network","metric":"Net buzz","value":34.17,"n":5355,"partial":"no"},{"month":"2026-04-30","brand":"Visa","type":"Network","metric":"Net buzz","value":32.45,"n":4898,"partial":"no"},{"month":"2026-05-31","brand":"Visa","type":"Network","metric":"Net buzz","value":33.76,"n":5192,"partial":"no"},{"month":"2026-06-30","brand":"Visa","type":"Network","metric":"Net buzz","value":34.06,"n":4946,"partial":"no"},{"month":"2026-07-31","brand":"Visa","type":"Network","metric":"Net buzz","value":31.53,"n":5181,"partial":"no"},{"month":"2026-08-31","brand":"Visa","type":"Network","metric":"Net buzz","value":32.3,"n":5281,"partial":"no"},{"month":"2026-09-30","brand":"Visa","type":"Network","metric":"Net buzz","value":31.27,"n":4990,"partial":"no"},{"month":"2026-10-13","brand":"Visa","type":"Network","metric":"Net buzz","value":32.26,"n":2205,"partial":"yes"},{"month":"2025-10-31","brand":"American Express","type":"Issuer","metric":"Net purchase consideration","value":2.19,"n":5417,"partial":"no"},{"month":"2025-11-30","brand":"American Express","type":"Issuer","metric":"Net purchase consideration","value":0.48,"n":5167,"partial":"no"},{"month":"2025-12-31","brand":"American Express","type":"Issuer","metric":"Net purchase consideration","value":4.5,"n":5163,"partial":"no"},{"month":"2026-01-31","brand":"American Express","type":"Issuer","metric":"Net purchase consideration","value":-0.56,"n":5358,"partial":"no"},{"month":"2026-02-28","brand":"American Express","type":"Issuer","metric":"Net purchase consideration","value":-0.39,"n":4839,"partial":"no"},{"month":"2026-03-31","brand":"American Express","type":"Issuer","metric":"Net purchase consideration","value":-1.11,"n":5398,"partial":"no"},{"month":"2026-04-30","brand":"American Express","type":"Issuer","metric":"Net purchase consideration","value":1.81,"n":5170,"partial":"no"},{"month":"2026-05-31","brand":"American Express","type":"Issuer","metric":"Net purchase consideration","value":0.94,"n":5101,"partial":"no"},{"month":"2026-06-30","brand":"American Express","type":"Issuer","metric":"Net purchase consideration","value":4.6,"n":4982,"partial":"no"},{"month":"2026-07-31","brand":"American Express","type":"Issuer","metric":"Net purchase consideration","value":-1.83,"n":5143,"partial":"no"},{"month":"2026-08-31","brand":"American Express","type":"Issuer","metric":"Net purchase consideration","value":1.25,"n":2899,"partial":"no"},{"month":"2026-09-30","brand":"American Express","type":"Issuer","metric":"Net purchase consideration","value":1.18,"n":2153,"partial":"no"},{"month":"2026-10-13","brand":"American Express","type":"Issuer","metric":"Net purchase consideration","value":-3.98,"n":150,"partial":"yes"},{"month":"2025-10-31","brand":"Capital One","type":"Issuer","metric":"Net purchase consideration","value":3.07,"n":5369,"partial":"no"},{"month":"2025-11-30","brand":"Capital One","type":"Issuer","metric":"Net purchase consideration","value":1.24,"n":5150,"partial":"no"},{"month":"2025-12-31","brand":"Capital One","type":"Issuer","metric":"Net purchase consideration","value":4.12,"n":5126,"partial":"no"},{"month":"2026-01-31","brand":"Capital One","type":"Issuer","metric":"Net purchase consideration","value":3.25,"n":5326,"partial":"no"},{"month":"2026-02-28","brand":"Capital One","type":"Issuer","metric":"Net purchase consideration","value":0.15,"n":4732,"partial":"no"},{"month":"2026-03-31","brand":"Capital One","type":"Issuer","metric":"Net purchase consideration","value":-0.02,"n":5310,"partial":"no"},{"month":"2026-04-30","brand":"Capital One","type":"Issuer","metric":"Net purchase consideration","value":2.07,"n":4961,"partial":"no"},{"month":"2026-05-31","brand":"Capital One","type":"Issuer","metric":"Net purchase consideration","value":4.84,"n":5133,"partial":"no"},{"month":"2026-06-30","brand":"Capital One","type":"Issuer","metric":"Net purchase consideration","value":4.61,"n":5166,"partial":"no"},{"month":"2026-07-31","brand":"Capital One","type":"Issuer","metric":"Net purchase consideration","value":0.44,"n":5303,"partial":"no"},{"month":"2026-08-31","brand":"Capital One","type":"Issuer","metric":"Net purchase consideration","value":2.43,"n":5201,"partial":"no"},{"month":"2026-09-30","brand":"Capital One","type":"Issuer","metric":"Net purchase consideration","value":3.47,"n":4842,"partial":"no"},{"month":"2026-10-13","brand":"Capital One","type":"Issuer","metric":"Net purchase consideration","value":0.68,"n":2147,"partial":"yes"},{"month":"2025-10-31","brand":"Chase","type":"Issuer","metric":"Net purchase consideration","value":7.5,"n":5494,"partial":"no"},{"month":"2025-11-30","brand":"Chase","type":"Issuer","metric":"Net purchase consideration","value":8.6,"n":5515,"partial":"no"},{"month":"2025-12-31","brand":"Chase","type":"Issuer","metric":"Net purchase consideration","value":7.39,"n":5079,"partial":"no"},{"month":"2026-01-31","brand":"Chase","type":"Issuer","metric":"Net purchase consideration","value":8.75,"n":5323,"partial":"no"},{"month":"2026-02-28","brand":"Chase","type":"Issuer","metric":"Net purchase consideration","value":12.54,"n":4734,"partial":"no"},{"month":"2026-03-31","brand":"Chase","type":"Issuer","metric":"Net purchase consideration","value":8.32,"n":5417,"partial":"no"},{"month":"2026-04-30","brand":"Chase","type":"Issuer","metric":"Net purchase consideration","value":7.39,"n":5092,"partial":"no"},{"month":"2026-05-31","brand":"Chase","type":"Issuer","metric":"Net purchase consideration","value":10.32,"n":5203,"partial":"no"},{"month":"2026-06-30","brand":"Chase","type":"Issuer","metric":"Net purchase consideration","value":12.1,"n":4955,"partial":"no"},{"month":"2026-07-31","brand":"Chase","type":"Issuer","metric":"Net purchase consideration","value":8.15,"n":5254,"partial":"no"},{"month":"2026-08-31","brand":"Chase","type":"Issuer","metric":"Net purchase consideration","value":7.57,"n":5334,"partial":"no"},{"month":"2026-09-30","brand":"Chase","type":"Issuer","metric":"Net purchase consideration","value":7.95,"n":5024,"partial":"no"},{"month":"2026-10-13","brand":"Chase","type":"Issuer","metric":"Net purchase consideration","value":8.43,"n":2147,"partial":"yes"},{"month":"2025-10-31","brand":"Citi","type":"Issuer","metric":"Net purchase consideration","value":-1.04,"n":549,"partial":"no"},{"month":"2025-11-30","brand":"Citi","type":"Issuer","metric":"Net purchase consideration","value":3.48,"n":489,"partial":"no"},{"month":"2025-12-31","brand":"Citi","type":"Issuer","metric":"Net purchase consideration","value":-2.41,"n":682,"partial":"no"},{"month":"2026-01-31","brand":"Citi","type":"Issuer","metric":"Net purchase consideration","value":2.49,"n":584,"partial":"no"},{"month":"2026-02-28","brand":"Citi","type":"Issuer","metric":"Net purchase consideration","value":-3.1,"n":593,"partial":"no"},{"month":"2026-03-31","brand":"Citi","type":"Issuer","metric":"Net purchase consideration","value":-6.66,"n":723,"partial":"no"},{"month":"2026-04-30","brand":"Citi","type":"Issuer","metric":"Net purchase consideration","value":-2.42,"n":596,"partial":"no"},{"month":"2026-05-31","brand":"Citi","type":"Issuer","metric":"Net purchase consideration","value":3.12,"n":529,"partial":"no"},{"month":"2026-06-30","brand":"Citi","type":"Issuer","metric":"Net purchase consideration","value":-2.45,"n":636,"partial":"no"},{"month":"2026-07-31","brand":"Citi","type":"Issuer","metric":"Net purchase consideration","value":-0.99,"n":579,"partial":"no"},{"month":"2026-08-31","brand":"Citi","type":"Issuer","metric":"Net purchase consideration","value":-11.82,"n":600,"partial":"no"},{"month":"2026-09-30","brand":"Citi","type":"Issuer","metric":"Net purchase consideration","value":-4.28,"n":783,"partial":"no"},{"month":"2026-10-13","brand":"Citi","type":"Issuer","metric":"Net purchase consideration","value":-0.37,"n":277,"partial":"yes"},{"month":"2025-10-31","brand":"Discover","type":"Issuer","metric":"Net purchase consideration","value":6.24,"n":2609,"partial":"no"},{"month":"2025-11-30","brand":"Discover","type":"Issuer","metric":"Net purchase consideration","value":4.88,"n":2590,"partial":"no"},{"month":"2025-12-31","brand":"Discover","type":"Issuer","metric":"Net purchase consideration","value":4.23,"n":2565,"partial":"no"},{"month":"2026-01-31","brand":"Discover","type":"Issuer","metric":"Net purchase consideration","value":2,"n":2724,"partial":"no"},{"month":"2026-02-28","brand":"Discover","type":"Issuer","metric":"Net purchase consideration","value":0.75,"n":2379,"partial":"no"},{"month":"2026-03-31","brand":"Discover","type":"Issuer","metric":"Net purchase consideration","value":2.67,"n":2718,"partial":"no"},{"month":"2026-04-30","brand":"Discover","type":"Issuer","metric":"Net purchase consideration","value":4.18,"n":2602,"partial":"no"},{"month":"2026-05-31","brand":"Discover","type":"Issuer","metric":"Net purchase consideration","value":0.43,"n":2565,"partial":"no"},{"month":"2026-06-30","brand":"Discover","type":"Issuer","metric":"Net purchase consideration","value":-0.79,"n":2598,"partial":"no"},{"month":"2026-07-31","brand":"Discover","type":"Issuer","metric":"Net purchase consideration","value":0.21,"n":2711,"partial":"no"},{"month":"2026-08-31","brand":"Discover","type":"Issuer","metric":"Net purchase consideration","value":1.58,"n":2500,"partial":"no"},{"month":"2026-09-30","brand":"Discover","type":"Issuer","metric":"Net purchase consideration","value":1.46,"n":2462,"partial":"no"},{"month":"2026-10-13","brand":"Discover","type":"Issuer","metric":"Net purchase consideration","value":2.33,"n":1070,"partial":"yes"},{"month":"2025-10-31","brand":"Mastercard","type":"Network","metric":"Net purchase consideration","value":31.21,"n":796,"partial":"no"},{"month":"2025-11-30","brand":"Mastercard","type":"Network","metric":"Net purchase consideration","value":31.41,"n":617,"partial":"no"},{"month":"2025-12-31","brand":"Mastercard","type":"Network","metric":"Net purchase consideration","value":32.67,"n":528,"partial":"no"},{"month":"2026-01-31","brand":"Mastercard","type":"Network","metric":"Net purchase consideration","value":31.41,"n":842,"partial":"no"},{"month":"2026-02-28","brand":"Mastercard","type":"Network","metric":"Net purchase consideration","value":28.54,"n":602,"partial":"no"},{"month":"2026-03-31","brand":"Mastercard","type":"Network","metric":"Net purchase consideration","value":31.12,"n":587,"partial":"no"},{"month":"2026-04-30","brand":"Mastercard","type":"Network","metric":"Net purchase consideration","value":29.86,"n":696,"partial":"no"},{"month":"2026-05-31","brand":"Mastercard","type":"Network","metric":"Net purchase consideration","value":31.77,"n":600,"partial":"no"},{"month":"2026-06-30","brand":"Mastercard","type":"Network","metric":"Net purchase consideration","value":32.9,"n":564,"partial":"no"},{"month":"2026-07-31","brand":"Mastercard","type":"Network","metric":"Net purchase consideration","value":30.01,"n":731,"partial":"no"},{"month":"2026-08-31","brand":"Mastercard","type":"Network","metric":"Net purchase consideration","value":29.86,"n":640,"partial":"no"},{"month":"2026-09-30","brand":"Mastercard","type":"Network","metric":"Net purchase consideration","value":36.77,"n":620,"partial":"no"},{"month":"2026-10-13","brand":"Mastercard","type":"Network","metric":"Net purchase consideration","value":21.99,"n":267,"partial":"yes"},{"month":"2025-10-31","brand":"Visa","type":"Network","metric":"Net purchase consideration","value":45.7,"n":828,"partial":"no"},{"month":"2025-11-30","brand":"Visa","type":"Network","metric":"Net purchase consideration","value":48.66,"n":636,"partial":"no"},{"month":"2025-12-31","brand":"Visa","type":"Network","metric":"Net purchase consideration","value":49.15,"n":541,"partial":"no"},{"month":"2026-01-31","brand":"Visa","type":"Network","metric":"Net purchase consideration","value":44.89,"n":4407,"partial":"no"},{"month":"2026-02-28","brand":"Visa","type":"Network","metric":"Net purchase consideration","value":46.5,"n":4868,"partial":"no"},{"month":"2026-03-31","brand":"Visa","type":"Network","metric":"Net purchase consideration","value":46.6,"n":5355,"partial":"no"},{"month":"2026-04-30","brand":"Visa","type":"Network","metric":"Net purchase consideration","value":44.8,"n":4898,"partial":"no"},{"month":"2026-05-31","brand":"Visa","type":"Network","metric":"Net purchase consideration","value":49.73,"n":5192,"partial":"no"},{"month":"2026-06-30","brand":"Visa","type":"Network","metric":"Net purchase consideration","value":46.2,"n":4946,"partial":"no"},{"month":"2026-07-31","brand":"Visa","type":"Network","metric":"Net purchase consideration","value":48.71,"n":5181,"partial":"no"},{"month":"2026-08-31","brand":"Visa","type":"Network","metric":"Net purchase consideration","value":44.62,"n":5281,"partial":"no"},{"month":"2026-09-30","brand":"Visa","type":"Network","metric":"Net purchase consideration","value":44.91,"n":4990,"partial":"no"},{"month":"2026-10-13","brand":"Visa","type":"Network","metric":"Net purchase consideration","value":45.9,"n":2205,"partial":"yes"}],"weekly_metrics":[{"week":"2026-08-09","brand":"American Express","metric":"Net favorability","value":37.89,"n":695},{"week":"2026-08-16","brand":"American Express","metric":"Net favorability","value":40.31,"n":634},{"week":"2026-08-23","brand":"American Express","metric":"Net favorability","value":37.71,"n":554},{"week":"2026-08-30","brand":"American Express","metric":"Net favorability","value":41.09,"n":556},{"week":"2026-09-06","brand":"American Express","metric":"Net favorability","value":38.65,"n":591},{"week":"2026-09-13","brand":"American Express","metric":"Net favorability","value":38.56,"n":555},{"week":"2026-09-20","brand":"American Express","metric":"Net favorability","value":40.78,"n":648},{"week":"2026-09-27","brand":"American Express","metric":"Net favorability","value":39.99,"n":311},{"week":"2026-10-04","brand":"American Express","metric":"Net favorability","value":41.01,"n":149},{"week":"2026-10-11","brand":"American Express","metric":"Net favorability","value":28.57,"n":150},{"week":"2026-08-09","brand":"Capital One","metric":"Net favorability","value":38.85,"n":1159},{"week":"2026-08-16","brand":"Capital One","metric":"Net favorability","value":31.82,"n":1178},{"week":"2026-08-23","brand":"Capital One","metric":"Net favorability","value":35.22,"n":1186},{"week":"2026-08-30","brand":"Capital One","metric":"Net favorability","value":31.73,"n":1090},{"week":"2026-09-06","brand":"Capital One","metric":"Net favorability","value":30.53,"n":1116},{"week":"2026-09-13","brand":"Capital One","metric":"Net favorability","value":28.91,"n":1108},{"week":"2026-09-20","brand":"Capital One","metric":"Net favorability","value":38.12,"n":1167},{"week":"2026-09-27","brand":"Capital One","metric":"Net favorability","value":33.45,"n":1187},{"week":"2026-10-04","brand":"Capital One","metric":"Net favorability","value":33.5,"n":1139},{"week":"2026-10-11","brand":"Capital One","metric":"Net favorability","value":34.84,"n":1109},{"week":"2026-08-09","brand":"Chase","metric":"Net favorability","value":41.01,"n":1258},{"week":"2026-08-16","brand":"Chase","metric":"Net favorability","value":43,"n":1133},{"week":"2026-08-23","brand":"Chase","metric":"Net favorability","value":43.86,"n":1246},{"week":"2026-08-30","brand":"Chase","metric":"Net favorability","value":42.23,"n":1119},{"week":"2026-09-06","brand":"Chase","metric":"Net favorability","value":39.24,"n":1178},{"week":"2026-09-13","brand":"Chase","metric":"Net favorability","value":34.6,"n":1146},{"week":"2026-09-20","brand":"Chase","metric":"Net favorability","value":41.25,"n":1213},{"week":"2026-09-27","brand":"Chase","metric":"Net favorability","value":40.07,"n":1233},{"week":"2026-10-04","brand":"Chase","metric":"Net favorability","value":39.76,"n":1092},{"week":"2026-10-11","brand":"Chase","metric":"Net favorability","value":45.35,"n":1168},{"week":"2026-08-09","brand":"Discover","metric":"Net favorability","value":41.85,"n":550},{"week":"2026-08-16","brand":"Discover","metric":"Net favorability","value":37.93,"n":582},{"week":"2026-08-23","brand":"Discover","metric":"Net favorability","value":45.64,"n":576},{"week":"2026-08-30","brand":"Discover","metric":"Net favorability","value":44.05,"n":528},{"week":"2026-09-06","brand":"Discover","metric":"Net favorability","value":38.14,"n":593},{"week":"2026-09-13","brand":"Discover","metric":"Net favorability","value":36.61,"n":612},{"week":"2026-09-20","brand":"Discover","metric":"Net favorability","value":46.85,"n":524},{"week":"2026-09-27","brand":"Discover","metric":"Net favorability","value":40.91,"n":565},{"week":"2026-10-04","brand":"Discover","metric":"Net favorability","value":39.04,"n":587},{"week":"2026-10-11","brand":"Discover","metric":"Net favorability","value":39.58,"n":591},{"week":"2026-08-09","brand":"American Express","metric":"Net buzz","value":25.39,"n":695},{"week":"2026-08-16","brand":"American Express","metric":"Net buzz","value":23.06,"n":634},{"week":"2026-08-23","brand":"American Express","metric":"Net buzz","value":23.82,"n":554},{"week":"2026-08-30","brand":"American Express","metric":"Net buzz","value":25.17,"n":556},{"week":"2026-09-06","brand":"American Express","metric":"Net buzz","value":19.93,"n":591},{"week":"2026-09-13","brand":"American Express","metric":"Net buzz","value":19.36,"n":555},{"week":"2026-09-20","brand":"American Express","metric":"Net buzz","value":23.31,"n":648},{"week":"2026-09-27","brand":"American Express","metric":"Net buzz","value":20.27,"n":311},{"week":"2026-10-04","brand":"American Express","metric":"Net buzz","value":27.27,"n":149},{"week":"2026-10-11","brand":"American Express","metric":"Net buzz","value":19.32,"n":150},{"week":"2026-08-09","brand":"Capital One","metric":"Net buzz","value":20.35,"n":1159},{"week":"2026-08-16","brand":"Capital One","metric":"Net buzz","value":22.82,"n":1178},{"week":"2026-08-23","brand":"Capital One","metric":"Net buzz","value":21.07,"n":1186},{"week":"2026-08-30","brand":"Capital One","metric":"Net buzz","value":21.14,"n":1090},{"week":"2026-09-06","brand":"Capital One","metric":"Net buzz","value":19.62,"n":1116},{"week":"2026-09-13","brand":"Capital One","metric":"Net buzz","value":19.41,"n":1108},{"week":"2026-09-20","brand":"Capital One","metric":"Net buzz","value":18.64,"n":1167},{"week":"2026-09-27","brand":"Capital One","metric":"Net buzz","value":23.4,"n":1187},{"week":"2026-10-04","brand":"Capital One","metric":"Net buzz","value":22.67,"n":1139},{"week":"2026-10-11","brand":"Capital One","metric":"Net buzz","value":18.65,"n":1109},{"week":"2026-08-09","brand":"Chase","metric":"Net buzz","value":22.87,"n":1258},{"week":"2026-08-16","brand":"Chase","metric":"Net buzz","value":25.89,"n":1133},{"week":"2026-08-23","brand":"Chase","metric":"Net buzz","value":24.72,"n":1246},{"week":"2026-08-30","brand":"Chase","metric":"Net buzz","value":25.4,"n":1119},{"week":"2026-09-06","brand":"Chase","metric":"Net buzz","value":21.67,"n":1178},{"week":"2026-09-13","brand":"Chase","metric":"Net buzz","value":24.67,"n":1146},{"week":"2026-09-20","brand":"Chase","metric":"Net buzz","value":24.09,"n":1213},{"week":"2026-09-27","brand":"Chase","metric":"Net buzz","value":27.56,"n":1233},{"week":"2026-10-04","brand":"Chase","metric":"Net buzz","value":25.14,"n":1092},{"week":"2026-10-11","brand":"Chase","metric":"Net buzz","value":27.71,"n":1168},{"week":"2026-08-09","brand":"Discover","metric":"Net buzz","value":24.22,"n":550},{"week":"2026-08-16","brand":"Discover","metric":"Net buzz","value":23.1,"n":582},{"week":"2026-08-23","brand":"Discover","metric":"Net buzz","value":26.29,"n":576},{"week":"2026-08-30","brand":"Discover","metric":"Net buzz","value":18.5,"n":528},{"week":"2026-09-06","brand":"Discover","metric":"Net buzz","value":20.5,"n":593},{"week":"2026-09-13","brand":"Discover","metric":"Net buzz","value":23.87,"n":612},{"week":"2026-09-20","brand":"Discover","metric":"Net buzz","value":20.13,"n":524},{"week":"2026-09-27","brand":"Discover","metric":"Net buzz","value":26.56,"n":565},{"week":"2026-10-04","brand":"Discover","metric":"Net buzz","value":19.1,"n":587},{"week":"2026-10-11","brand":"Discover","metric":"Net buzz","value":18.85,"n":591},{"week":"2026-08-09","brand":"American Express","metric":"Net purchase consideration","value":3.39,"n":695},{"week":"2026-08-16","brand":"American Express","metric":"Net purchase consideration","value":3.79,"n":634},{"week":"2026-08-23","brand":"American Express","metric":"Net purchase consideration","value":-1.34,"n":554},{"week":"2026-08-30","brand":"American Express","metric":"Net purchase consideration","value":-1.4,"n":556},{"week":"2026-09-06","brand":"American Express","metric":"Net purchase consideration","value":4.36,"n":591},{"week":"2026-09-13","brand":"American Express","metric":"Net purchase consideration","value":-2.2,"n":555},{"week":"2026-09-20","brand":"American Express","metric":"Net purchase consideration","value":0.65,"n":648},{"week":"2026-09-27","brand":"American Express","metric":"Net purchase consideration","value":2.19,"n":311},{"week":"2026-10-04","brand":"American Express","metric":"Net purchase consideration","value":6.77,"n":149},{"week":"2026-10-11","brand":"American Express","metric":"Net purchase consideration","value":-3.98,"n":150},{"week":"2026-08-09","brand":"Capital One","metric":"Net purchase consideration","value":3.75,"n":1159},{"week":"2026-08-16","brand":"Capital One","metric":"Net purchase consideration","value":0.74,"n":1178},{"week":"2026-08-23","brand":"Capital One","metric":"Net purchase consideration","value":4.48,"n":1186},{"week":"2026-08-30","brand":"Capital One","metric":"Net purchase consideration","value":1.97,"n":1090},{"week":"2026-09-06","brand":"Capital One","metric":"Net purchase consideration","value":1.88,"n":1116},{"week":"2026-09-13","brand":"Capital One","metric":"Net purchase consideration","value":2,"n":1108},{"week":"2026-09-20","brand":"Capital One","metric":"Net purchase consideration","value":7.03,"n":1167},{"week":"2026-09-27","brand":"Capital One","metric":"Net purchase consideration","value":-0.53,"n":1187},{"week":"2026-10-04","brand":"Capital One","metric":"Net purchase consideration","value":1.96,"n":1139},{"week":"2026-10-11","brand":"Capital One","metric":"Net purchase consideration","value":1.58,"n":1109},{"week":"2026-08-09","brand":"Chase","metric":"Net purchase consideration","value":6.36,"n":1258},{"week":"2026-08-16","brand":"Chase","metric":"Net purchase consideration","value":12.69,"n":1133},{"week":"2026-08-23","brand":"Chase","metric":"Net purchase consideration","value":5.79,"n":1246},{"week":"2026-08-30","brand":"Chase","metric":"Net purchase consideration","value":7.19,"n":1119},{"week":"2026-09-06","brand":"Chase","metric":"Net purchase consideration","value":7.34,"n":1178},{"week":"2026-09-13","brand":"Chase","metric":"Net purchase consideration","value":4.34,"n":1146},{"week":"2026-09-20","brand":"Chase","metric":"Net purchase consideration","value":7.54,"n":1213},{"week":"2026-09-27","brand":"Chase","metric":"Net purchase consideration","value":9.73,"n":1233},{"week":"2026-10-04","brand":"Chase","metric":"Net purchase consideration","value":12.96,"n":1092},{"week":"2026-10-11","brand":"Chase","metric":"Net purchase consideration","value":7.08,"n":1168},{"week":"2026-08-09","brand":"Discover","metric":"Net purchase consideration","value":1.52,"n":550},{"week":"2026-08-16","brand":"Discover","metric":"Net purchase consideration","value":2.66,"n":582},{"week":"2026-08-23","brand":"Discover","metric":"Net purchase consideration","value":2.71,"n":576},{"week":"2026-08-30","brand":"Discover","metric":"Net purchase consideration","value":-0.02,"n":528},{"week":"2026-09-06","brand":"Discover","metric":"Net purchase consideration","value":2.01,"n":593},{"week":"2026-09-13","brand":"Discover","metric":"Net purchase consideration","value":-5.48,"n":612},{"week":"2026-09-20","brand":"Discover","metric":"Net purchase consideration","value":5.27,"n":524},{"week":"2026-09-27","brand":"Discover","metric":"Net purchase consideration","value":6.07,"n":565},{"week":"2026-10-04","brand":"Discover","metric":"Net purchase consideration","value":0.42,"n":587},{"week":"2026-10-11","brand":"Discover","metric":"Net purchase consideration","value":2.83,"n":591}],"engaged_users":[{"month":"2025-10-31","group":"Politically engaged","metric":"Net favorability","value":76.39,"n":919},{"month":"2025-11-30","group":"Politically engaged","metric":"Net favorability","value":76.31,"n":863},{"month":"2025-12-31","group":"Politically engaged","metric":"Net favorability","value":78.63,"n":903},{"month":"2026-01-31","group":"Politically engaged","metric":"Net favorability","value":74.59,"n":819},{"month":"2026-02-28","group":"Politically engaged","metric":"Net favorability","value":71.92,"n":672},{"month":"2026-03-31","group":"Politically engaged","metric":"Net favorability","value":74.61,"n":874},{"month":"2026-04-30","group":"Politically engaged","metric":"Net favorability","value":73.51,"n":843},{"month":"2026-05-31","group":"Politically engaged","metric":"Net favorability","value":70.97,"n":853},{"month":"2026-06-30","group":"Politically engaged","metric":"Net favorability","value":79.91,"n":786},{"month":"2026-07-31","group":"Politically engaged","metric":"Net favorability","value":74.2,"n":819},{"month":"2026-08-31","group":"Politically engaged","metric":"Net favorability","value":74.04,"n":491},{"month":"2026-09-30","group":"Politically engaged","metric":"Net favorability","value":70.49,"n":346},{"month":"2025-10-31","group":"Not interested","metric":"Net favorability","value":63.86,"n":279},{"month":"2025-11-30","group":"Not interested","metric":"Net favorability","value":60.96,"n":271},{"month":"2025-12-31","group":"Not interested","metric":"Net favorability","value":48.77,"n":316},{"month":"2026-01-31","group":"Not interested","metric":"Net favorability","value":50.1,"n":287},{"month":"2026-02-28","group":"Not interested","metric":"Net favorability","value":48.46,"n":271},{"month":"2026-03-31","group":"Not interested","metric":"Net favorability","value":59.05,"n":304},{"month":"2026-04-30","group":"Not interested","metric":"Net favorability","value":64.22,"n":280},{"month":"2026-05-31","group":"Not interested","metric":"Net favorability","value":61.63,"n":271},{"month":"2026-06-30","group":"Not interested","metric":"Net favorability","value":59.62,"n":280},{"month":"2026-07-31","group":"Not interested","metric":"Net favorability","value":40,"n":250},{"month":"2026-08-31","group":"Not interested","metric":"Net favorability","value":54.65,"n":188},{"month":"2026-09-30","group":"Not interested","metric":"Net favorability","value":49.77,"n":135},{"month":"2025-10-31","group":"Politically engaged","metric":"Net buzz","value":48.16,"n":919},{"month":"2025-11-30","group":"Politically engaged","metric":"Net buzz","value":51,"n":863},{"month":"2025-12-31","group":"Politically engaged","metric":"Net buzz","value":51.48,"n":903},{"month":"2026-01-31","group":"Politically engaged","metric":"Net buzz","value":46.52,"n":819},{"month":"2026-02-28","group":"Politically engaged","metric":"Net buzz","value":46.21,"n":672},{"month":"2026-03-31","group":"Politically engaged","metric":"Net buzz","value":41.61,"n":874},{"month":"2026-04-30","group":"Politically engaged","metric":"Net buzz","value":45.02,"n":843},{"month":"2026-05-31","group":"Politically engaged","metric":"Net buzz","value":44.07,"n":853},{"month":"2026-06-30","group":"Politically engaged","metric":"Net buzz","value":49.83,"n":786},{"month":"2026-07-31","group":"Politically engaged","metric":"Net buzz","value":44.48,"n":819},{"month":"2026-08-31","group":"Politically engaged","metric":"Net buzz","value":42.76,"n":491},{"month":"2026-09-30","group":"Politically engaged","metric":"Net buzz","value":37.38,"n":346},{"month":"2025-10-31","group":"Not interested","metric":"Net buzz","value":42.12,"n":279},{"month":"2025-11-30","group":"Not interested","metric":"Net buzz","value":40.09,"n":271},{"month":"2025-12-31","group":"Not interested","metric":"Net buzz","value":40.63,"n":316},{"month":"2026-01-31","group":"Not interested","metric":"Net buzz","value":40.49,"n":287},{"month":"2026-02-28","group":"Not interested","metric":"Net buzz","value":42.5,"n":271},{"month":"2026-03-31","group":"Not interested","metric":"Net buzz","value":30.91,"n":304},{"month":"2026-04-30","group":"Not interested","metric":"Net buzz","value":31.42,"n":280},{"month":"2026-05-31","group":"Not interested","metric":"Net buzz","value":36.66,"n":271},{"month":"2026-06-30","group":"Not interested","metric":"Net buzz","value":42.19,"n":280},{"month":"2026-07-31","group":"Not interested","metric":"Net buzz","value":25.4,"n":250},{"month":"2026-08-31","group":"Not interested","metric":"Net buzz","value":29.29,"n":188},{"month":"2026-09-30","group":"Not interested","metric":"Net buzz","value":27.9,"n":135},{"month":"2025-10-31","group":"Politically engaged","metric":"Net purchase consideration","value":67.05,"n":919},{"month":"2025-11-30","group":"Politically engaged","metric":"Net purchase consideration","value":64.7,"n":863},{"month":"2025-12-31","group":"Politically engaged","metric":"Net purchase consideration","value":63.63,"n":903},{"month":"2026-01-31","group":"Politically engaged","metric":"Net purchase consideration","value":63.14,"n":818},{"month":"2026-02-28","group":"Politically engaged","metric":"Net purchase consideration","value":63.53,"n":671},{"month":"2026-03-31","group":"Politically engaged","metric":"Net purchase consideration","value":60.92,"n":874},{"month":"2026-04-30","group":"Politically engaged","metric":"Net purchase consideration","value":68.28,"n":843},{"month":"2026-05-31","group":"Politically engaged","metric":"Net purchase consideration","value":63.31,"n":853},{"month":"2026-06-30","group":"Politically engaged","metric":"Net purchase consideration","value":72.76,"n":786},{"month":"2026-07-31","group":"Politically engaged","metric":"Net purchase consideration","value":57.43,"n":818},{"month":"2026-08-31","group":"Politically engaged","metric":"Net purchase consideration","value":68.88,"n":490},{"month":"2026-09-30","group":"Politically engaged","metric":"Net purchase consideration","value":66.28,"n":346},{"month":"2025-10-31","group":"Not interested","metric":"Net purchase consideration","value":48.23,"n":279},{"month":"2025-11-30","group":"Not interested","metric":"Net purchase consideration","value":35.03,"n":271},{"month":"2025-12-31","group":"Not interested","metric":"Net purchase consideration","value":34.41,"n":316},{"month":"2026-01-31","group":"Not interested","metric":"Net purchase consideration","value":42.49,"n":288},{"month":"2026-02-28","group":"Not interested","metric":"Net purchase consideration","value":34.87,"n":271},{"month":"2026-03-31","group":"Not interested","metric":"Net purchase consideration","value":36.77,"n":304},{"month":"2026-04-30","group":"Not interested","metric":"Net purchase consideration","value":44.57,"n":280},{"month":"2026-05-31","group":"Not interested","metric":"Net purchase consideration","value":44.55,"n":272},{"month":"2026-06-30","group":"Not interested","metric":"Net purchase consideration","value":55.3,"n":279},{"month":"2026-07-31","group":"Not interested","metric":"Net purchase consideration","value":30.34,"n":250},{"month":"2026-08-31","group":"Not interested","metric":"Net purchase consideration","value":42.13,"n":188},{"month":"2026-09-30","group":"Not interested","metric":"Net purchase consideration","value":39.16,"n":135},{"month":"2025-10-31","group":"Politically engaged","metric":"Net trust","value":69.51,"n":919},{"month":"2025-11-30","group":"Politically engaged","metric":"Net trust","value":68.02,"n":863},{"month":"2025-12-31","group":"Politically engaged","metric":"Net trust","value":67.31,"n":903},{"month":"2026-01-31","group":"Politically engaged","metric":"Net trust","value":64.78,"n":819},{"month":"2026-02-28","group":"Politically engaged","metric":"Net trust","value":62.56,"n":672},{"month":"2026-03-31","group":"Politically engaged","metric":"Net trust","value":62.94,"n":874},{"month":"2026-04-30","group":"Politically engaged","metric":"Net trust","value":63.83,"n":843},{"month":"2026-05-31","group":"Politically engaged","metric":"Net trust","value":68,"n":853},{"month":"2026-06-30","group":"Politically engaged","metric":"Net trust","value":66.71,"n":786},{"month":"2026-07-31","group":"Politically engaged","metric":"Net trust","value":60.61,"n":819},{"month":"2026-08-31","group":"Politically engaged","metric":"Net trust","value":67.54,"n":491},{"month":"2026-09-30","group":"Politically engaged","metric":"Net trust","value":58.24,"n":346},{"month":"2025-10-31","group":"Not interested","metric":"Net trust","value":48.77,"n":279},{"month":"2025-11-30","group":"Not interested","metric":"Net trust","value":53.01,"n":271},{"month":"2025-12-31","group":"Not interested","metric":"Net trust","value":35.07,"n":316},{"month":"2026-01-31","group":"Not interested","metric":"Net trust","value":49.16,"n":287},{"month":"2026-02-28","group":"Not interested","metric":"Net trust","value":35.4,"n":271},{"month":"2026-03-31","group":"Not interested","metric":"Net trust","value":42.84,"n":304},{"month":"2026-04-30","group":"Not interested","metric":"Net trust","value":42.96,"n":280},{"month":"2026-05-31","group":"Not interested","metric":"Net trust","value":49.54,"n":271},{"month":"2026-06-30","group":"Not interested","metric":"Net trust","value":47.78,"n":280},{"month":"2026-07-31","group":"Not interested","metric":"Net trust","value":39.99,"n":250},{"month":"2026-08-31","group":"Not interested","metric":"Net trust","value":42.94,"n":188},{"month":"2026-09-30","group":"Not interested","metric":"Net trust","value":43.94,"n":135}],"engaged_weekly":[{"week":"2026-08-09","group":"Politically engaged","metric":"Net trust","value":76.29,"n":108},{"week":"2026-08-16","group":"Politically engaged","metric":"Net trust","value":71.49,"n":107},{"week":"2026-08-23","group":"Politically engaged","metric":"Net trust","value":60.99,"n":95},{"week":"2026-08-30","group":"Politically engaged","metric":"Net trust","value":78.3,"n":98},{"week":"2026-09-06","group":"Politically engaged","metric":"Net trust","value":40.66,"n":97},{"week":"2026-09-13","group":"Politically engaged","metric":"Net trust","value":67.36,"n":102},{"week":"2026-09-20","group":"Politically engaged","metric":"Net trust","value":52.01,"n":99},{"week":"2026-09-27","group":"Politically engaged","metric":"Net trust","value":69.21,"n":42},{"week":"2026-10-04","group":"Politically engaged","metric":"Net trust","value":46.63,"n":28},{"week":"2026-10-07","group":"Politically engaged","metric":"Net trust","value":6.5,"n":24},{"week":"2026-08-09","group":"Politically engaged","metric":"Net favorability","value":80.35,"n":108},{"week":"2026-08-16","group":"Politically engaged","metric":"Net favorability","value":75.11,"n":107},{"week":"2026-08-23","group":"Politically engaged","metric":"Net favorability","value":79.82,"n":95},{"week":"2026-08-30","group":"Politically engaged","metric":"Net favorability","value":68.7,"n":98},{"week":"2026-09-06","group":"Politically engaged","metric":"Net favorability","value":58.71,"n":97},{"week":"2026-09-13","group":"Politically engaged","metric":"Net favorability","value":78.09,"n":102},{"week":"2026-09-20","group":"Politically engaged","metric":"Net favorability","value":69.05,"n":99},{"week":"2026-09-27","group":"Politically engaged","metric":"Net favorability","value":59.88,"n":42},{"week":"2026-10-04","group":"Politically engaged","metric":"Net favorability","value":71.43,"n":28},{"week":"2026-10-07","group":"Politically engaged","metric":"Net favorability","value":38.5,"n":24},{"week":"2026-08-09","group":"Politically engaged","metric":"Net buzz","value":47.8,"n":108},{"week":"2026-08-16","group":"Politically engaged","metric":"Net buzz","value":41.2,"n":107},{"week":"2026-08-23","group":"Politically engaged","metric":"Net buzz","value":57.25,"n":95},{"week":"2026-08-30","group":"Politically engaged","metric":"Net buzz","value":35.58,"n":98},{"week":"2026-09-06","group":"Politically engaged","metric":"Net buzz","value":25.27,"n":97},{"week":"2026-09-13","group":"Politically engaged","metric":"Net buzz","value":40.67,"n":102},{"week":"2026-09-20","group":"Politically engaged","metric":"Net buzz","value":43.89,"n":99},{"week":"2026-09-27","group":"Politically engaged","metric":"Net buzz","value":25.2,"n":42},{"week":"2026-10-04","group":"Politically engaged","metric":"Net buzz","value":42.25,"n":28},{"week":"2026-10-07","group":"Politically engaged","metric":"Net buzz","value":42.13,"n":24},{"week":"2026-08-09","group":"Politically engaged","metric":"Net purchase consideration","value":70.38,"n":108},{"week":"2026-08-16","group":"Politically engaged","metric":"Net purchase consideration","value":65.33,"n":107},{"week":"2026-08-23","group":"Politically engaged","metric":"Net purchase consideration","value":62.42,"n":95},{"week":"2026-08-30","group":"Politically engaged","metric":"Net purchase consideration","value":75.24,"n":98},{"week":"2026-09-06","group":"Politically engaged","metric":"Net purchase consideration","value":72.68,"n":97},{"week":"2026-09-13","group":"Politically engaged","metric":"Net purchase consideration","value":60.33,"n":102},{"week":"2026-09-20","group":"Politically engaged","metric":"Net purchase consideration","value":66.88,"n":99},{"week":"2026-09-27","group":"Politically engaged","metric":"Net purchase consideration","value":60.99,"n":42},{"week":"2026-10-04","group":"Politically engaged","metric":"Net purchase consideration","value":76.13,"n":28},{"week":"2026-10-07","group":"Politically engaged","metric":"Net purchase consideration","value":45.09,"n":24},{"week":"2026-08-09","group":"Not interested","metric":"Net trust","value":36.56,"n":45},{"week":"2026-08-16","group":"Not interested","metric":"Net trust","value":65.25,"n":43},{"week":"2026-08-23","group":"Not interested","metric":"Net trust","value":66.63,"n":33},{"week":"2026-08-30","group":"Not interested","metric":"Net trust","value":-15.86,"n":28},{"week":"2026-09-06","group":"Not interested","metric":"Net trust","value":22.23,"n":39},{"week":"2026-09-13","group":"Not interested","metric":"Net trust","value":60.17,"n":38},{"week":"2026-09-20","group":"Not interested","metric":"Net trust","value":47.16,"n":34},{"week":"2026-09-27","group":"Not interested","metric":"Net trust","value":43.76,"n":17},{"week":"2026-10-04","group":"Not interested","metric":"Net trust","value":50.78,"n":11},{"week":"2026-10-07","group":"Not interested","metric":"Net trust","value":71.15,"n":7},{"week":"2026-08-09","group":"Not interested","metric":"Net favorability","value":63.02,"n":45},{"week":"2026-08-16","group":"Not interested","metric":"Net favorability","value":53.25,"n":43},{"week":"2026-08-23","group":"Not interested","metric":"Net favorability","value":48.31,"n":33},{"week":"2026-08-30","group":"Not interested","metric":"Net favorability","value":38.31,"n":28},{"week":"2026-09-06","group":"Not interested","metric":"Net favorability","value":37.47,"n":39},{"week":"2026-09-13","group":"Not interested","metric":"Net favorability","value":19.8,"n":38},{"week":"2026-09-20","group":"Not interested","metric":"Net favorability","value":65.05,"n":34},{"week":"2026-09-27","group":"Not interested","metric":"Net favorability","value":80.58,"n":17},{"week":"2026-10-04","group":"Not interested","metric":"Net favorability","value":81.15,"n":11},{"week":"2026-10-07","group":"Not interested","metric":"Net favorability","value":61.19,"n":7},{"week":"2026-08-09","group":"Not interested","metric":"Net buzz","value":29.47,"n":45},{"week":"2026-08-16","group":"Not interested","metric":"Net buzz","value":39.24,"n":43},{"week":"2026-08-23","group":"Not interested","metric":"Net buzz","value":14.11,"n":33},{"week":"2026-08-30","group":"Not interested","metric":"Net buzz","value":16.33,"n":28},{"week":"2026-09-06","group":"Not interested","metric":"Net buzz","value":12.82,"n":39},{"week":"2026-09-13","group":"Not interested","metric":"Net buzz","value":41.35,"n":38},{"week":"2026-09-20","group":"Not interested","metric":"Net buzz","value":29.6,"n":34},{"week":"2026-09-27","group":"Not interested","metric":"Net buzz","value":46.55,"n":17},{"week":"2026-10-04","group":"Not interested","metric":"Net buzz","value":24.38,"n":11},{"week":"2026-10-07","group":"Not interested","metric":"Net buzz","value":-13.9,"n":7},{"week":"2026-08-09","group":"Not interested","metric":"Net purchase consideration","value":52.01,"n":45},{"week":"2026-08-16","group":"Not interested","metric":"Net purchase consideration","value":46.39,"n":43},{"week":"2026-08-23","group":"Not interested","metric":"Net purchase consideration","value":43.53,"n":33},{"week":"2026-08-30","group":"Not interested","metric":"Net purchase consideration","value":16.31,"n":28},{"week":"2026-09-06","group":"Not interested","metric":"Net purchase consideration","value":31.8,"n":39},{"week":"2026-09-13","group":"Not interested","metric":"Net purchase consideration","value":40.36,"n":38},{"week":"2026-09-20","group":"Not interested","metric":"Net purchase consideration","value":33.66,"n":34},{"week":"2026-09-27","group":"Not interested","metric":"Net purchase consideration","value":20.57,"n":17},{"week":"2026-10-04","group":"Not interested","metric":"Net purchase consideration","value":89.79,"n":11},{"week":"2026-10-07","group":"Not interested","metric":"Net purchase consideration","value":17.1,"n":7}]};
+  var calcs={},cache={},cbs=[];
+  window.dash={
+    colors:['var(--ax-accent)','#4a7fb5','#5a9a6b','#8a6fb0','#c9a227','#4aa3a3','#b05a7a','#7a7a7a'],
+    data:function(id){
+      if(DATA[id])return {status:'ok',data:DATA[id]};
+      if(calcs[id]){
+        if(!cache[id]){try{cache[id]=calcs[id].fn.apply(null,calcs[id].inputs.map(function(i){return DATA[i];}));}catch(e){console.error(id,e);return {status:'error',data:null};}}
+        return {status:'ok',data:cache[id]};
+      }
+      return {status:'loading',data:null};
+    },
+    calc:function(id,o){calcs[id]=o;},
+    onData:function(cb){cbs.push(cb);},
+    setLink:function(name){try{history.replaceState(null,'','#'+name);}catch(e){}},
+    params:function(){return {};}
+  };
+  function run(){cbs.forEach(function(cb){cb();});}
+  window.addEventListener('DOMContentLoaded',function(){setTimeout(run,0);});
+  var t;window.addEventListener('resize',function(){clearTimeout(t);t=setTimeout(run,150);});
+})();
+</script>
+<script>
+(function(){
+  const ISSUERS=['American Express','Chase','Capital One','Discover','Citi'];
+  const WBRANDS=['American Express','Chase','Capital One','Discover'];
+  const LOWN=300;
+  const ENGLOW=60;
+  const minus='\u2212';
+  const f1=v=>(v<0?minus:'')+d3.format('.1f')(Math.abs(v));
+  const fn0=d3.format(',');
+  const ready=s=>!!s&&Array.isArray(s.data)&&s.data.length>0;
+  const parse=s=>new Date(String(s).slice(0,10)+'T00:00:00Z');
+  const colorOf=b=>b==='American Express'?dash.colors[0]:'var(--cds-chart-muted)';
+  const sg=v=>(v>0?'+':v<0?minus:'')+d3.format('.1f')(Math.abs(v));
+
+  dash.calc('amex_focus',{
+    inputs:['weekly_metrics'],
+    title:'Amex baseline vs. last weeks',
+    description:'For each metric: average, low and high of Amex weekly readings for weeks ending Aug 9 to Sep 20, plus the weeks ending Oct 4 and Oct 11.',
+    fn:(weekly_metrics)=>{
+      const metrics=['Net favorability','Net buzz','Net purchase consideration'];
+      const r2=x=>Math.round(x*100)/100;
+      return metrics.map(m=>{
+        const a=weekly_metrics.filter(r=>r.brand==='American Express'&&r.metric===m).map(r=>({w:String(r.week).slice(0,10),v:Number(r.value)}));
+        const base=a.filter(x=>x.w<='2026-09-20').map(x=>x.v);
+        const g=w=>a.find(x=>x.w===w).v;
+        return {metric:m,base_avg:r2(base.reduce((s,x)=>s+x,0)/base.length),base_min:Math.min(...base),base_max:Math.max(...base),oct4:g('2026-10-04'),oct11:g('2026-10-11')};
+      });
+    }
+  });
+
+  dash.calc('amex_weekly',{
+    inputs:['weekly_metrics'],
+    title:'Amex by week',
+    description:'One row per week with Amex favorability, buzz, consideration and respondents, plus Chase respondents.',
+    fn:(weekly_metrics)=>{
+      const wk=r=>String(r.week).slice(0,10);
+      const weeks=[...new Set(weekly_metrics.filter(r=>r.brand==='American Express').map(wk))].sort();
+      const v=(b,m,w)=>{const r=weekly_metrics.find(x=>x.brand===b&&x.metric===m&&wk(x)===w);return r?Number(r.value):null;};
+      const n=(b,w)=>{const r=weekly_metrics.find(x=>x.brand===b&&x.metric==='Net favorability'&&wk(x)===w);return r?Number(r.n):null;};
+      return weeks.map(w=>({week:w,favorability:v('American Express','Net favorability',w),buzz:v('American Express','Net buzz',w),consideration:v('American Express','Net purchase consideration',w),n:n('American Express',w),chase_n:n('Chase',w)}));
+    }
+  });
+
+  dash.calc('eng_summary',{
+    inputs:['engaged_users'],
+    title:'Engaged users: Sep vs. Aug',
+    description:'For each metric: politically engaged Amex users in Sep 2026, change since Aug 2026, and gap to Amex users not interested in politics in Sep 2026.',
+    fn:(engaged_users)=>{
+      const metrics=['Net trust','Net favorability','Net buzz','Net purchase consideration'];
+      const r2=x=>Math.round(x*100)/100;
+      const g=(m,grp,d)=>engaged_users.find(r=>r.metric===m&&r.group===grp&&String(r.month).slice(0,10)===d);
+      return metrics.map(m=>{
+        const a=Number(g(m,'Politically engaged','2026-08-31').value),b=Number(g(m,'Politically engaged','2026-09-30').value),c=Number(g(m,'Not interested','2026-09-30').value);
+        return {metric:m,sep26:b,change:r2(b-a),gap:r2(b-c)};
+      });
+    }
+  });
+
+  dash.calc('eng_weekly',{
+    inputs:['engaged_weekly'],
+    title:'Engaged users by week',
+    description:'One row per week with the four metrics for politically engaged users and respondents in both groups.',
+    fn:(engaged_weekly)=>{
+      const wk=r=>String(r.week).slice(0,10);
+      const weeks=[...new Set(engaged_weekly.map(wk))].sort();
+      const f=(g,m,w)=>engaged_weekly.find(r=>r.group===g&&r.metric===m&&wk(r)===w);
+      return weeks.map(w=>({week:w,trust:Number(f('Politically engaged','Net trust',w).value),favorability:Number(f('Politically engaged','Net favorability',w).value),buzz:Number(f('Politically engaged','Net buzz',w).value),consideration:Number(f('Politically engaged','Net purchase consideration',w).value),n:Number(f('Politically engaged','Net trust',w).n),other_n:Number(f('Not interested','Net trust',w).n)}));
+    }
+  });
+
+  dash.calc('eng_n',{
+    inputs:['engaged_users'],
+    title:'Respondents by month',
+    description:'Respondents per month in each group (from the favorability question).',
+    fn:(engaged_users)=>{
+      const mo=r=>String(r.month).slice(0,10);
+      const months=[...new Set(engaged_users.map(mo))].sort();
+      const n=(grp,m)=>Number(engaged_users.find(r=>r.metric==='Net favorability'&&r.group===grp&&mo(r)===m).n);
+      return months.map(m=>({month:m,engaged_n:n('Politically engaged',m),other_n:n('Not interested',m)}));
+    }
+  });
+
+  function fail(el){
+    el.textContent='';el.classList.remove('dash-skeleton');
+    const d=document.createElement('div');d.className='ax-fail';
+    const dot=document.createElement('span');dot.className='ax-dot';
+    const t=document.createElement('span');t.textContent='Failed to load';
+    d.append(dot,t);el.appendChild(d);
+  }
+
+  function weeklySeries(rows,metric){
+    return WBRANDS.map(b=>({brand:b,pts:rows.filter(r=>r.brand===b&&r.metric===metric).map(r=>({d:parse(r.week),v:Number(r.value),n:Number(r.n)})).sort((a,c)=>a.d-c.d)}));
+  }
+  function monthlySeries(rows,metric){
+    return ISSUERS.map(b=>({brand:b,pts:rows.filter(r=>r.brand===b&&r.metric===metric&&r.partial==='no').map(r=>({d:parse(r.month),v:Number(r.value),n:Number(r.n)})).sort((a,c)=>a.d-c.d)}));
+  }
+
+  function drawLine(box,series,o){
+    box.textContent='';
+    const hi=series[0];
+    if(!hi||!hi.pts.length)return;
+    const colorOf=b=>b===hi.brand?dash.colors[0]:'var(--cds-chart-muted)';
+    const W=Math.max(280,box.clientWidth),H=o.H||300;
+    const svg=d3.select(box).append('svg').attr('width','100%').attr('viewBox','0 0 '+W+' '+H).style('display','block');
+    const labels=series.map(s=>{const last=s.pts[s.pts.length-1].v;return {brand:s.brand,v:last,text:((o.short&&o.short[s.brand])||s.brand)+' '+f1(last)};});
+    const tmp=svg.append('text').style('font-size','12px');
+    let maxW=0;labels.forEach(l=>{tmp.text(l.text);maxW=Math.max(maxW,tmp.node().getComputedTextLength());});
+    tmp.text(minus+'12.0');const yw=tmp.node().getComputedTextLength();tmp.remove();
+    const ml=Math.ceil(yw)+10,mr=Math.ceil(maxW)+14,mt=12,mb=28;
+    const all=series.flatMap(s=>s.pts.map(p=>p.v));
+    const x=d3.scaleUtc([hi.pts[0].d,hi.pts[hi.pts.length-1].d],[ml,W-mr]);
+    const y=d3.scaleLinear([d3.min(all),d3.max(all)],[H-mb,mt]).nice(5);
+    if(o.band){
+      const bx=x(o.band.from),bw=x(o.band.to)-bx;
+      svg.append('rect').attr('x',bx).attr('y',mt).attr('width',Math.max(0,bw)).attr('height',H-mb-mt).style('fill','var(--cds-chart-grid)').style('opacity',.55);
+    }
+    const yt=y.ticks(5);
+    svg.append('g').selectAll('line').data(yt).join('line').attr('x1',ml).attr('x2',W-mr).attr('y1',d=>y(d)).attr('y2',d=>y(d)).style('stroke','var(--cds-chart-grid)').attr('stroke-width',1);
+    svg.append('g').selectAll('text').data(yt).join('text').attr('x',ml-6).attr('y',d=>y(d)+4).attr('text-anchor','end').style('font-size','11px').style('fill','var(--color-fg-muted)').text(d=>(d<0?minus:'')+d3.format('.0f')(Math.abs(d)));
+    if(y.domain()[0]<0&&y.domain()[1]>0){svg.append('line').attr('x1',ml).attr('x2',W-mr).attr('y1',y(0)).attr('y2',y(0)).style('stroke','var(--cds-chart-reference)').attr('stroke-width',1).attr('stroke-dasharray','4 3');}
+    const npts=hi.pts.length;
+    const step=npts>10?(W<520?3:W<760?2:1):(W<520?2:1);
+    const xt=hi.pts.map(p=>p.d).filter((d,i)=>i%step===0);
+    const fmtX=d3.utcFormat(o.xfmt);
+    svg.append('g').selectAll('text').data(xt).join('text').attr('x',d=>x(d)).attr('y',H-8).attr('text-anchor','middle').style('font-size','11px').style('fill','var(--color-fg-muted)').text(d=>fmtX(d));
+    const line=d3.line().x(p=>x(p.d)).y(p=>y(p.v));
+    const stroke=(pts,s,dash)=>{
+      const amex=s.brand===hi.brand;
+      const p=svg.append('path').datum(pts).attr('d',line).attr('fill','none').attr('stroke-linecap','round').attr('stroke-linejoin','round').attr('stroke-width',amex?2.5:1.5).style('stroke',colorOf(s.brand));
+      if(dash)p.attr('stroke-dasharray','5 4');
+    };
+    series.slice(1).forEach(s=>stroke(s.pts,s,false));
+    const lowIdx=o.lowN?hi.pts.findIndex(p=>p.n<o.lowN):-1;
+    if(lowIdx>0){stroke(hi.pts.slice(0,lowIdx),hi,false);stroke(hi.pts.slice(lowIdx-1),hi,true);}
+    else stroke(hi.pts,hi,false);
+    if(o.lowN){
+      hi.pts.filter(p=>p.n<o.lowN).forEach(p=>{
+        svg.append('circle').attr('cx',x(p.d)).attr('cy',y(p.v)).attr('r',4).attr('stroke-width',2).style('fill','var(--color-panel)').style('stroke',colorOf(hi.brand));
+      });
+    }
+    const ys=labels.map(l=>({l,y:y(l.v)})).sort((a,c)=>a.y-c.y);
+    for(let i=1;i<ys.length;i++){if(ys[i].y-ys[i-1].y<14)ys[i].y=ys[i-1].y+14;}
+    const over=ys[ys.length-1].y-(H-mb);if(over>0)ys.forEach(q=>{q.y-=over;});
+    ys.forEach(q=>{
+      const amex=q.l.brand===hi.brand;
+      svg.append('text').attr('x',W-mr+6).attr('y',q.y+4).style('font-size','12px').style('font-weight',amex?'600':'400').style('fill',amex?colorOf(q.l.brand):'var(--color-fg-muted)').text(q.l.text);
+    });
+    const tip=document.createElement('div');tip.className='ax-tip';box.appendChild(tip);
+    const rule=svg.append('line').attr('y1',mt).attr('y2',H-mb).style('stroke','var(--cds-chart-reference)').style('opacity',0).style('pointer-events','none');
+    const dotG=svg.append('g').style('pointer-events','none');
+    const dots=series.map(s=>dotG.append('circle').attr('r',4).style('fill',colorOf(s.brand)).style('opacity',0));
+    svg.append('rect').attr('x',ml).attr('y',mt).attr('width',W-mr-ml).attr('height',H-mb-mt).style('fill','transparent')
+      .on('mousemove',ev=>{
+        const mx=d3.pointer(ev)[0];
+        const k=d3.minIndex(hi.pts,p=>Math.abs(x(p.d)-mx));
+        const d0=hi.pts[k].d,cx=x(d0);
+        rule.attr('x1',cx).attr('x2',cx).style('opacity',1);
+        series.forEach((s,i)=>dots[i].attr('cx',cx).attr('cy',y(s.pts[k].v)).style('opacity',1));
+        tip.textContent='';
+        const h=document.createElement('div');h.className='ax-tip-h';h.textContent=o.tipHead(d0);tip.appendChild(h);
+        series.map(s=>({b:s.brand,v:s.pts[k].v})).sort((a,c)=>c.v-a.v).forEach(q=>{
+          const r=document.createElement('div');r.className='ax-tip-r';
+          const sw=document.createElement('span');sw.className='ax-sw';sw.style.background=colorOf(q.b);
+          const nm=document.createElement('span');nm.textContent=q.b;
+          const vv=document.createElement('span');vv.className='num';vv.textContent=f1(q.v);
+          r.append(sw,nm,vv);tip.appendChild(r);
+        });
+        if(o.showN){const f=document.createElement('div');f.className='ax-tip-f';f.textContent=(o.nLabel||'Respondents')+': '+fn0(hi.pts[k].n);tip.appendChild(f);}
+        tip.style.display='block';
+        const tw=tip.offsetWidth;const left=(cx+12+tw>W)?cx-12-tw:cx+12;
+        tip.style.left=Math.max(0,left)+'px';tip.style.top='8px';
+      })
+      .on('mouseleave',()=>{tip.style.display='none';rule.style('opacity',0);dots.forEach(d=>d.style('opacity',0));});
+  }
+
+  function drawBars(box,rows){
+    box.textContent='';
+    const brands=['American Express','Chase'];
+    const wk=r=>String(r.week).slice(0,10);
+    const weeks=[...new Set(rows.filter(r=>r.metric==='Net favorability').map(wk))].sort();
+    if(!weeks.length)return;
+    const val=(b,w)=>{const r=rows.find(q=>q.brand===b&&q.metric==='Net favorability'&&wk(q)===w);return r?Number(r.n):0;};
+    const W=Math.max(280,box.clientWidth),H=240,mt=26,mb=28;
+    const svg=d3.select(box).append('svg').attr('width','100%').attr('viewBox','0 0 '+W+' '+H).style('display','block');
+    const ymax=d3.max(weeks,w=>Math.max(val(brands[0],w),val(brands[1],w)));
+    const y=d3.scaleLinear([0,ymax],[H-mb,mt]).nice(4);
+    const tmp=svg.append('text').style('font-size','11px');
+    tmp.text(fn0(y.domain()[1]));const yw=tmp.node().getComputedTextLength();tmp.remove();
+    const ml=Math.ceil(yw)+10;
+    const x0=d3.scaleBand(weeks,[ml,W-6]).paddingInner(.2);
+    const x1=d3.scaleBand(brands,[0,x0.bandwidth()]).padding(.08);
+    const yt=y.ticks(4);
+    svg.append('g').selectAll('line').data(yt).join('line').attr('x1',ml).attr('x2',W-6).attr('y1',d=>y(d)).attr('y2',d=>y(d)).style('stroke','var(--cds-chart-grid)').attr('stroke-width',1);
+    svg.append('g').selectAll('text').data(yt).join('text').attr('x',ml-6).attr('y',d=>y(d)+4).attr('text-anchor','end').style('font-size','11px').style('fill','var(--color-fg-muted)').text(d=>fn0(d));
+    const step=W<520?2:1;
+    const fmtX=d3.utcFormat('%b %-d');
+    svg.append('g').selectAll('text').data(weeks.filter((w,i)=>i%step===0)).join('text').attr('x',w=>x0(w)+x0.bandwidth()/2).attr('y',H-8).attr('text-anchor','middle').style('font-size','11px').style('fill','var(--color-fg-muted)').text(w=>fmtX(parse(w)));
+    weeks.forEach(w=>{
+      brands.forEach(b=>{
+        const v=val(b,w);
+        svg.append('rect').attr('x',x0(w)+x1(b)).attr('y',y(v)).attr('width',x1.bandwidth()).attr('height',Math.max(0,y(0)-y(v))).attr('rx',3).style('fill',colorOf(b));
+      });
+    });
+    [['Amex',brands[0],ml],['Chase',brands[1],ml+70]].forEach(l=>{
+      svg.append('circle').attr('cx',l[2]+4).attr('cy',10).attr('r',4).style('fill',colorOf(l[1]));
+      svg.append('text').attr('x',l[2]+13).attr('y',14).style('font-size','12px').style('fill','var(--color-fg-muted)').text(l[0]);
+    });
+    const tip=document.createElement('div');tip.className='ax-tip';box.appendChild(tip);
+    svg.append('rect').attr('x',ml).attr('y',mt).attr('width',W-6-ml).attr('height',H-mb-mt).style('fill','transparent')
+      .on('mousemove',ev=>{
+        const mx=d3.pointer(ev)[0];
+        const k=d3.minIndex(weeks,w=>Math.abs(x0(w)+x0.bandwidth()/2-mx));
+        const w=weeks[k],cx=x0(w)+x0.bandwidth()/2;
+        tip.textContent='';
+        const h=document.createElement('div');h.className='ax-tip-h';h.textContent='Week ending '+d3.utcFormat('%b %-d')(parse(w));tip.appendChild(h);
+        brands.forEach(b=>{
+          const r=document.createElement('div');r.className='ax-tip-r';
+          const sw=document.createElement('span');sw.className='ax-sw';sw.style.background=colorOf(b);
+          const nm=document.createElement('span');nm.textContent=b;
+          const vv=document.createElement('span');vv.className='num';vv.textContent=fn0(val(b,w));
+          r.append(sw,nm,vv);tip.appendChild(r);
+        });
+        tip.style.display='block';
+        const tw=tip.offsetWidth;const left=(cx+16+tw>W)?cx-16-tw:cx+16;
+        tip.style.left=Math.max(0,left)+'px';tip.style.top='8px';
+      })
+      .on('mouseleave',()=>{tip.style.display='none';});
+  }
+
+  function drawTable(){
+    const t=document.getElementById('ax-wtable'),tb=t.querySelector('tbody'),s=dash.data('amex_weekly');
+    tb.textContent='';
+    if(!ready(s))return;
+    const fmtD=d3.utcFormat('%b %-d');
+    s.data.forEach(r=>{
+      const tr=document.createElement('tr');
+      tr.setAttribute('data-key',r.week);
+      if(Number(r.n)<LOWN)tr.className='ax-low';
+      [[fmtD(parse(r.week)),0],[f1(r.favorability),1],[f1(r.buzz),1],[f1(r.consideration),1],[fn0(r.n),1],[fn0(r.chase_n),1]].forEach(c=>{
+        const td=document.createElement('td');td.textContent=c[0];if(c[1])td.className='num';tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  }
+
+  function groupSeries(rows,metric){
+    return ['Politically engaged','Not interested'].map(g=>({brand:g,pts:rows.filter(r=>r.group===g&&r.metric===metric).map(r=>({d:parse(r.month),v:Number(r.value),n:Number(r.n)})).sort((a,c)=>a.d-c.d)}));
+  }
+
+  function drawEngTable(){
+    const t=document.getElementById('ax-eng-n'),tb=t.querySelector('tbody'),s=dash.data('eng_n');
+    tb.textContent='';
+    if(!ready(s))return;
+    const fmtM=d3.utcFormat('%b %Y');
+    s.data.forEach(r=>{
+      const tr=document.createElement('tr');tr.setAttribute('data-key',r.month);
+      [[fmtM(parse(r.month)),0],[fn0(r.engaged_n),1],[fn0(r.other_n),1]].forEach(c=>{
+        const td=document.createElement('td');td.textContent=c[0];if(c[1])td.className='num';tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  }
+
+  function renderP1(){
+    const wm=dash.data('weekly_metrics'),bm=dash.data('brand_metrics'),af=dash.data('amex_focus');
+    document.querySelectorAll('#brand [data-m]').forEach(el=>{
+      const r=ready(af)?af.data.find(x=>x.metric===el.dataset.m):null;
+      if(!r){el.textContent='—';return;}
+      el.classList.remove('dash-skeleton');
+      el.textContent=f1(Number(r[el.dataset.field]));
+    });
+    const bandFrom=parse('2026-10-05'),bandTo=parse('2026-10-11');
+    const wopts={H:300,lowN:LOWN,short:{'American Express':'Amex'},nLabel:'Amex respondents',band:{from:bandFrom,to:bandTo},xfmt:'%b %-d',showN:true,tipHead:d=>'Week ending '+d3.utcFormat('%b %-d')(d)};
+    [['ax-wfav','Net favorability'],['ax-wbuzz','Net buzz'],['ax-wcon','Net purchase consideration']].forEach(a=>{
+      const box=document.getElementById(a[0]);
+      if(wm.status==='error'){fail(box);return;}
+      if(!ready(wm))return;
+      box.classList.remove('dash-skeleton');
+      drawLine(box,weeklySeries(wm.data,a[1]),wopts);
+    });
+    const nb=document.getElementById('ax-wn');
+    if(wm.status==='error')fail(nb);
+    else if(ready(wm)){nb.classList.remove('dash-skeleton');drawBars(nb,wm.data);}
+    const mopts={H:260,short:{'American Express':'Amex'},nLabel:'Amex respondents',xfmt:'%b %y',showN:false,tipHead:d=>d3.utcFormat('%B %Y')(d)};
+    [['ax-mfav','Net favorability'],['ax-mbuzz','Net buzz'],['ax-mcon','Net purchase consideration']].forEach(a=>{
+      const box=document.getElementById(a[0]);
+      if(bm.status==='error'){fail(box);return;}
+      if(!ready(bm))return;
+      box.classList.remove('dash-skeleton');
+      drawLine(box,monthlySeries(bm.data,a[1]),mopts);
+    });
+    drawTable();
+  }
+
+  function engWeeklySeries(rows,metric){
+    return [{brand:'Politically engaged',pts:rows.filter(r=>r.group==='Politically engaged'&&r.metric===metric).map(r=>({d:parse(r.week),v:Number(r.value),n:Number(r.n)})).sort((a,c)=>a.d-c.d)}];
+  }
+
+  function drawEngWeeklyTable(){
+    const t=document.getElementById('ax-eng-wtable'),tb=t.querySelector('tbody'),s=dash.data('eng_weekly');
+    tb.textContent='';
+    if(!ready(s))return;
+    const fmtD=d3.utcFormat('%b %-d');
+    s.data.forEach(r=>{
+      const tr=document.createElement('tr');tr.setAttribute('data-key',r.week);
+      if(Number(r.n)<ENGLOW)tr.className='ax-low';
+      [[fmtD(parse(r.week)),0],[f1(r.trust),1],[f1(r.favorability),1],[f1(r.buzz),1],[f1(r.consideration),1],[fn0(r.n),1],[fn0(r.other_n),1]].forEach(c=>{
+        const td=document.createElement('td');td.textContent=c[0];if(c[1])td.className='num';tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  }
+
+  function renderP2(){
+    const eu=dash.data('engaged_users'),es=dash.data('eng_summary'),ew=dash.data('engaged_weekly');
+    document.querySelectorAll('#engaged [data-m]').forEach(el=>{
+      const r=ready(es)?es.data.find(x=>x.metric===el.dataset.m):null;
+      if(!r){el.textContent='—';return;}
+      el.classList.remove('dash-skeleton');
+      const v=Number(r[el.dataset.field]);
+      el.textContent=el.dataset.field==='sep26'?f1(v):sg(v);
+    });
+    const lastWk=parse('2026-10-07');
+    const wopts={H:260,lowN:ENGLOW,short:{'Politically engaged':'Engaged'},nLabel:'Engaged respondents',xfmt:'%b %-d',showN:true,tipHead:d=>(d.getTime()===lastWk.getTime()?'Oct 5 to 7 (partial week)':'Week ending '+d3.utcFormat('%b %-d')(d))};
+    [['ax-wetrust','Net trust'],['ax-wefav','Net favorability'],['ax-webuzz','Net buzz'],['ax-wecon','Net purchase consideration']].forEach(a=>{
+      const box=document.getElementById(a[0]);
+      if(ew.status==='error'){fail(box);return;}
+      if(!ready(ew))return;
+      box.classList.remove('dash-skeleton');
+      drawLine(box,engWeeklySeries(ew.data,a[1]),wopts);
+    });
+    drawEngWeeklyTable();
+    const eopts={H:260,short:{'Politically engaged':'Engaged'},nLabel:'Engaged respondents',xfmt:'%b %y',showN:true,tipHead:d=>d3.utcFormat('%B %Y')(d)};
+    [['ax-etrust','Net trust'],['ax-efav','Net favorability'],['ax-ebuzz','Net buzz'],['ax-econ','Net purchase consideration']].forEach(a=>{
+      const box=document.getElementById(a[0]);
+      if(eu.status==='error'){fail(box);return;}
+      if(!ready(eu))return;
+      box.classList.remove('dash-skeleton');
+      drawLine(box,groupSeries(eu.data,a[1]),eopts);
+    });
+    drawEngTable();
+  }
+
+  function render(){
+    const p1=document.getElementById('brand'),p2=document.getElementById('engaged');
+    if(!p1.hidden)renderP1();
+    else if(!p2.hidden&&p2.firstChild)renderP2();
+  }
+
+  function showPage(which){
+    const p1=document.getElementById('brand'),p2=document.getElementById('engaged');
+    if(which===2&&!p2.firstChild)p2.appendChild(document.getElementById('ax-tpl-eng').content.cloneNode(true));
+    p1.hidden=which!==1;p2.hidden=which!==2;
+    [['ax-tab-1',1],['ax-tab-2',2]].forEach(t=>{
+      const b=document.getElementById(t[0]);
+      b.setAttribute('aria-selected',String(which===t[1]));
+      b.classList.toggle('ax-on',which===t[1]);
+    });
+    dash.setLink(which===1?'brand':'engaged');
+    render();
+  }
+
+  document.getElementById('ax-tab-1').addEventListener('click',()=>showPage(1));
+  document.getElementById('ax-tab-2').addEventListener('click',()=>showPage(2));
+  dash.onData(()=>{render();});
+  if(location.hash.slice(1)==='engaged')showPage(2);
+})();
+</script>
+</body>
+</html>
